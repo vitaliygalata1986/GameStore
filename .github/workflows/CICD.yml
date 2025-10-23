@@ -1,3 +1,4 @@
+# Название пайплайна — будет отображаться в вкладке "Actions"
 name: GameStore Deploy
 
 on:
@@ -11,18 +12,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Переменные окружения для всего job.
+    # DEPLOY_PATH выбирается тернарным выражением:
+    # - для push → public_html (стейдж)
+    # - для release → public_html/live (прод)
+    env:
+      DEPLOY_PATH: ${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}
+
     steps:
+      # 1) Забираем код репозитория
       - name: Checkout
         uses: actions/checkout@master
 
+      # 2) Готовим архив ядра WordPress по ссылке из wp-version-control.cfg
       - name: Prepare WordPress Zip
         run: |
-          WP_LINK=$(cat wp-version-control.cfg)
-          wget -O "./wordpress.zip" $WP_LINK
+          WP_LINK=$(cat wp-version-control.cfg)      # В файле должна быть прямая ссылка на zip WordPress
+          wget -O "./wordpress.zip" $WP_LINK         # Скачиваем архив в рабочую директорию
 
+      # 3) Упаковываем плагины, mu-plugins и темы в один архив
       - name: Prepare plugins and theme zip
         run: zip -r wpcontent.zip plugins mu-plugins themes
 
+      # 4) Копируем оба архива на сервер по SSH
       - name: Copy Zips to Server
         uses: appleboy/scp-action@master
         with:
@@ -31,9 +43,10 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           # passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}   # если есть
-          source: "./wordpress.zip, ./wpcontent.zip"
-          target: ${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}
+          source: "./wordpress.zip, ./wpcontent.zip"       # Источники через запятую
+          target: ${{ env.DEPLOY_PATH }}                   # Используем общий путь деплоя
 
+      # 5) Включаем режим обслуживания (Maintenance Mode)
       - name: Enable Maintenance Mode
         uses: appleboy/scp-action@master
         with:
@@ -42,10 +55,10 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           # passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          source: ".maintenance"
-          target: ${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}
+          source: ".maintenance"                           # Локальный файл .maintenance должен быть в репозитории
+          target: ${{ env.DEPLOY_PATH }}                   # Кладём .maintenance в корень деплоя
 
-      # Распаковка Wordpress
+      # 6) Распаковка и обновление WordPress Core
       - name: Update WordPress Core
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -55,12 +68,24 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           # passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           script: |
-            find "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}" -type f -name "*.php" ! -name "wp-config.php" -delete
-            rm -r "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-admin/" "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-includes/"
-            unzip -o "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wordpress.zip" -d "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/"
-            mv "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wordpress"/* "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/"
-            rm -r "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wordpress"
+            DEPLOY_PATH="${{ env.DEPLOY_PATH }}"  # Пробрасываем путь деплоя в переменную на сервере
 
+            # Удаляем все PHP-файлы (кроме wp-config.php) перед обновлением ядра
+            find "$DEPLOY_PATH" -type f -name "*.php" ! -name "wp-config.php" -delete
+
+            # Удаляем директории ядра WordPress (wp-admin и wp-includes) для чистого обновления
+            rm -r "$DEPLOY_PATH/wp-admin/" "$DEPLOY_PATH/wp-includes/"
+
+            # Распаковываем архив WordPress в DEPLOY_PATH
+            unzip -o "$DEPLOY_PATH/wordpress.zip" -d "$DEPLOY_PATH/"
+
+            # Переносим файлы из поддиректории wordpress/ в корень сайта
+            mv "$DEPLOY_PATH/wordpress"/* "$DEPLOY_PATH/"
+
+            # Удаляем пустую директорию wordpress/
+            rm -r "$DEPLOY_PATH/wordpress"
+
+      # 7) Обновляем плагины и тему (wp-content)
       - name: Update Plugins and Theme
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -70,10 +95,15 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           # passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           script: |
-            rm -rf "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-content/plugins" "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-content/mu-plugins" "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-content/themes"
-            unzip -o "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wpcontent.zip" -d "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wp-content/"
+            DEPLOY_PATH="${{ env.DEPLOY_PATH }}"  # Пробрасываем путь деплоя в переменную на сервере
 
-      # Удалить Maintenance Mode и Remove zips
+            # Полностью очищаем каталоги плагинов, mu-plugins и тем
+            rm -rf "$DEPLOY_PATH/wp-content/plugins" "$DEPLOY_PATH/wp-content/mu-plugins" "$DEPLOY_PATH/wp-content/themes"
+
+            # Распаковываем подготовленный архив контента в wp-content/
+            unzip -o "$DEPLOY_PATH/wpcontent.zip" -d "$DEPLOY_PATH/wp-content/"
+
+      # 8) Выключаем Maintenance Mode и удаляем временные архивы
       - name: Disable Maintenance Mode and Remove zips
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -83,6 +113,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           # passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           script: |
-            rm -f "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/.maintenance"
-            rm -f "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wpcontent.zip"
-            rm -f "${{ github.event_name == 'push' && 'public_html' || 'public_html/live' }}/wordpress.zip"
+            DEPLOY_PATH="${{ env.DEPLOY_PATH }}"  # Пробрасываем путь деплоя в переменную на сервере
+
+            # Удаляем файл .maintenance
+            rm -f "$DEPLOY_PATH/.maintenance"
+
+            # Чистим загруженные zip-архивы
+            rm -f "$DEPLOY_PATH/wpcontent.zip"
+            rm -f "$DEPLOY_PATH/wordpress.zip"
