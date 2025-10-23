@@ -33,7 +33,7 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Blocks Gamestore – hello from the editor!',
+				'Blocks Gamestore – hello!',
 				'blocks-gamestore'
 			) }
 		</p>
