@@ -1,25 +1,30 @@
-/**
- * Use this file for JavaScript code that you want to run in the front-end
- * on posts/pages that contain this block.
- *
- * When this file is defined as the value of the `viewScript` property
- * in `block.json` it will be enqueued on the front end of the site.
- *
- * Example:
- *
- * ```js
- * {
- *   "viewScript": "file:./view.js"
- * }
- * ```
- *
- * If you're not making any changes to this file because your project doesn't need any
- * JavaScript running in the front-end, then you should delete this file and remove
- * the `viewScript` property from `block.json`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
- */
+/** Home slider **/
+document.addEventListener('DOMContentLoaded', function() {
+	var swiperHero = new Swiper('.hero-slider .slider-container', {
+		loop: true,
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: false,
+		},
+		slidesPerView: 7,
+		speed: 1500,
+		grabCursor: true,
+		mousewheel: true, // Разрешает листать слайды колесиком мыши.
+		keyboardControl: true, // Разрешает управлять слайдером с клавиатуры (стрелками).
+	});
+});
 
-/* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-blocks-gamestore block)' );
-/* eslint-enable no-console */
+/*
+	disableOnInteraction: false в Swiper означает:
+	автопрокрутка (autoplay) НЕ остановится, если пользователь взаимодействует со слайдером — например:
+		свайпнет мышью/тачем,
+		переключит слайд стрелкой,
+		прокрутит колесиком и т.д.
+	Если бы было true (это дефолтное поведение у Swiper), то после первого ручного действия autoplay выключился бы совсем.
+	То есть у тебя сейчас логика такая:
+	слайды сами листаются каждые 5 секунд, и даже если я руками полистал — через 5 секунд оно продолжит само.
+
+	grabCursor - Показывает курсор “рука-захват” (grab) когда наводишься на слайдер.
+	Чисто UX-фишка: намекает, что блок можно “тянуть” мышкой.
+
+* */
