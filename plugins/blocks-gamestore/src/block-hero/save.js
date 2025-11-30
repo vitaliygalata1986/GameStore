@@ -2,9 +2,9 @@ import { useBlockProps } from '@wordpress/block-editor';
 import {RichText} from '@wordpress/block-editor';
 export default function save({ attributes }) {
 	const { title, description, link, linkAnchor, video, image, slides } = attributes
-	console.log('slides',slides);
-	console.log('title',title);
-	console.log('attributes',attributes);
+	// console.log('slides',slides);
+	// console.log('title',title);
+	// console.log('attributes',attributes);
 	return (
 		<div {...useBlockProps.save()}>
 			{video && (
