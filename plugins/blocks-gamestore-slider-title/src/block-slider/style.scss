@@ -1,0 +1,21 @@
+.is-layout-constrained .wp-block-create-block-blocks-slider{
+	.slider-container{
+		width: 100%;
+		overflow: hidden;
+
+		> .swiper-wrapper{
+			transition: transform 3500ms linear;
+			transition-timing-function: linear;
+		}
+
+		.slide-item{
+			width: 267px;
+			img{
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				border-radius: 8px;
+			}
+		}
+	}
+}

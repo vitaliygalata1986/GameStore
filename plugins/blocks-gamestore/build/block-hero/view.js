@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){new Swiper(".hero-slider .slider-container",{loop:!0,autoplay:{delay:5e3,disableOnInteraction:!1},slidesPerView:7,speed:1500,grabCursor:!0,mousewheel:!0,keyboardControl:!0})});

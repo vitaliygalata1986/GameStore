@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){new Swiper(".games-line-container",{loop:!0,autoplay:{delay:1,disableOnInteraction:!1},slidesPerView:"auto",speed:3500,grabCursor:!0,spaceBetween:8})});
