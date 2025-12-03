@@ -1,0 +1,15 @@
+.hero-slider__container .swiper-wrapper{
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	.slide-item{
+		width: 267px;
+		height: 403px;
+		img{
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+			border-radius: 8px;
+		}
+	}
+}

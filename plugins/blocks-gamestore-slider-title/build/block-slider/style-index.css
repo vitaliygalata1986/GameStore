@@ -1,0 +1,23 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-slider/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+.is-layout-constrained .wp-block-create-block-blocks-slider .slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+.is-layout-constrained .wp-block-create-block-blocks-slider .slider-container > .swiper-wrapper {
+  transition: transform 3500ms linear;
+  transition-timing-function: linear;
+}
+.is-layout-constrained .wp-block-create-block-blocks-slider .slider-container .slide-item {
+  width: 267px;
+}
+.is-layout-constrained .wp-block-create-block-blocks-slider .slider-container .slide-item img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
