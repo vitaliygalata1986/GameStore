@@ -133,5 +133,40 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
+	),
+	'block-recent-news' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'blocks-gamestore/recent-news',
+		'version' => '0.1.0',
+		'title' => 'Recent News',
+		'category' => 'gamestore',
+		'icon' => 'smiley',
+		'description' => 'Recent News Block',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'count' => array(
+				'type' => 'number',
+				'default' => 3
+			),
+			'title' => array(
+				'type' => 'string'
+			),
+			'description' => array(
+				'type' => 'string'
+			),
+			'image' => array(
+				'type' => 'string'
+			)
+		),
+		'textdomain' => 'blocks-gamestore',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
 	)
 );
