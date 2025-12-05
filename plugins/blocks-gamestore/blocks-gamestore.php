@@ -43,6 +43,13 @@ function create_block_blocks_gamestore_block_init() {
 			'render_callback' => 'view_block_games_line',
 		]
 	);
+
+	register_block_type(
+		__DIR__ . '/build/block-recent-news',
+		[
+			'render_callback' => 'view_block_recent_news',
+		]
+	);
 }
 add_action( 'init', 'create_block_blocks_gamestore_block_init' );
 
