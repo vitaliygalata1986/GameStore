@@ -51,5 +51,16 @@ function gamestore_google_font_script(){
 }
 add_action('wp_enqueue_scripts','gamestore_google_font_script');
 
+
+// Load assets in Gutenberg
+function gamestore_gutenberg_styles(){
+    wp_enqueue_style('gamestore-google-font',gamestore_google_font(),[],'1.0.0');
+
+    if(is_admin()){
+        add_editor_style('/assets/css/editor-style.css');
+    }
+}
+add_action('enqueue_block_editor_assets', 'gamestore_gutenberg_styles');
+
 // https://www.youtube.com/watch?v=c8nob2rQ9To&t=36638s
 // 3-38
