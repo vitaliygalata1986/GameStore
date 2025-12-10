@@ -1,0 +1,26 @@
+:root {
+    --background-default: #FAFAFA;
+    --background-80: rgba(250, 250, 250, 0.8);
+    --background-2: rgba(250, 250, 250, 0.02);
+    --action-main: rgba(14, 13, 15, 0.64);
+    --action-main-svg: rgb(14, 13, 15);
+    --divider-main: rgba(14, 13, 15, 0.08);
+    --text-primary: #0E0D0F;
+    --text-secondary: rgba(14, 13, 15, 0.70);
+    --secondary-48: rgba(250, 250, 250, 0.48);
+    --white-contrast: #0A090A;
+    --black-contrast: #FFF;
+    --purple-main: #6F76C0;
+    --wp--preset--color--base: #fff;
+    --mask-gradient: linear-gradient(270deg, rgba(14, 13, 15, 0.00) 0%, #ECECEC 79.5%);
+    --mask-gradient-second: linear-gradient(180deg, rgba(250, 250, 250, 0.00) 0%, #FAFAFA 100%);
+    --accent-gradient: linear-gradient(90deg, #3DAFE2 0%, #6F76C0 100%);
+    --divider-input: rgba(14, 13, 15, 0.24);
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1540px;
+    margin-left: auto;
+    margin-right: auto;
+}

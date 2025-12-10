@@ -1,14 +1,5 @@
 /* админская часть */
 
-:root {
-	--white-contrast: #0A090A;
-	--purple-main: #6F76C0;
-	--text-secondary: rgba(14, 13, 15, 0.70);
-	--mask-gradient: linear-gradient(270deg, rgba(14, 13, 15, 0.00) 0%, #ECECEC 79.5%);
-	--mask-gradient-second: linear-gradient(180deg, rgba(250, 250, 250, 0.00) 0%, #FAFAFA 100%);
-	--accent-gradient: linear-gradient(90deg, #3DAFE2 0%, #6F76C0 100%);
-}
-
 .hero-button {
 	border-radius: 5px;
 	display: inline-flex;
