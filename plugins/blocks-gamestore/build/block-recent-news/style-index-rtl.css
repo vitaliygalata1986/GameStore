@@ -7,8 +7,10 @@
   max-width: calc(100% + var(--wp--style--root--padding-right) + var(--wp--style--root--padding-left)) !important;
   margin-left: calc(var(--wp--style--root--padding-right) * -1) !important;
   margin-right: calc(var(--wp--style--root--padding-left) * -1) !important;
-  margin-top: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
-  margin-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+  padding-top: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+  padding-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .wp-block-blocks-gamestore-recent-news {
   text-align: center;

@@ -36,7 +36,8 @@ function view_block_games_line($attributes)
 	return ob_get_clean();
 }
 
-function view_block_recent_news($attributes) {
+function view_block_recent_news($attributes)
+{
 	// print_r($attributes);
 	$args = array(
 		'post_type' => 'news',
@@ -49,12 +50,12 @@ function view_block_recent_news($attributes) {
 	$image_bg = ($attributes['image']) ? 'style="background-image: url(' . $attributes['image'] . ')"' : '';
 
 	ob_start();
-	echo '<div '. get_block_wrapper_attributes() . $image_bg .'>';
+	echo '<div ' . get_block_wrapper_attributes() . $image_bg . '>';
 	if ($news_query->have_posts()) {
-		if($attributes['title']){
+		if ($attributes['title']) {
 			echo '<h2>' . $attributes['title'] . '</h2>';
 		}
-		if($attributes['description']){
+		if ($attributes['description']) {
 			echo '<p>' . $attributes['description'] . '</p>';
 		}
 		echo '<div class="recent-news wrapper">';
@@ -68,7 +69,7 @@ function view_block_recent_news($attributes) {
 				echo '<img src="' . get_the_post_thumbnail_url() . '" class="original-image" alt="' . get_the_title() . '">';
 				echo '</div>';
 			}
-			echo '<div class="news-excerpt">'.get_the_excerpt().'</div>';
+			echo '<div class="news-excerpt">' . get_the_excerpt() . '</div>';
 			echo '<a href="' . get_the_permalink() . '" class="read-more">Open the post</a>';
 			echo '</div>';
 		}
@@ -80,6 +81,22 @@ function view_block_recent_news($attributes) {
 
 	wp_reset_postdata();
 
+	// Return the buffered content
+	return ob_get_clean();
+}
+
+function view_block_subscribe($attributes)
+{
+	$image_bg = ($attributes['image']) ? 'style="background-image: url(' . $attributes['image'] . ')"' : '';
+	// передаваймый нами класс из 	<div {...useBlockProps({ className: 'alignfull',   (edit.js) -> будет подхватываться функцией get_block_wrapper_attributes
+	ob_start();
+	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . $image_bg . '>';
+	echo '<div class="subscribe-inner wrapper">';
+	echo '<h2 class="subscribe-title"> ' . $attributes['title'] . ' </h2>';
+	echo '<p class="subscribe-description"> ' . $attributes['description'] . ' </p>';
+	echo '<div class="subscribe-shortcode"> ' . do_shortcode($attributes['shortcode']) . ' </div>';
+	echo '</div>';
+	echo '</div>';
 	// Return the buffered content
 	return ob_get_clean();
 }

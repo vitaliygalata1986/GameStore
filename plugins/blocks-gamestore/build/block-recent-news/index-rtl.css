@@ -40,3 +40,8 @@ h6 {
 .wp-block-blocks-gamestore-recent-news .recent-news .news-item h3 {
   margin-bottom: 0;
 }
+
+.wp-block-blocks-gamestore-recent-news .wp-block-blocks-gamestore-recent-news {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
