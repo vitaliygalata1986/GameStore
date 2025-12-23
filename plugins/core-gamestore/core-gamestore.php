@@ -14,4 +14,5 @@
  define('GAMESTORE_PLUGIN_URL', plugin_dir_url(__FILE__));   // http://localhost:8200/wp-content/plugins/core-gamestore/
  define('GAMESTORE_PLUGIN_PATH', plugin_dir_path(__FILE__)); // /var/www/html/wp-content/plugins/core-gamestore/
 
-require_once(GAMESTORE_PLUGIN_PATH . 'inc/core-game.php');
+require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-search.php');
+require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-meta.php');
