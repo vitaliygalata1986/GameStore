@@ -44,11 +44,18 @@ function load_latest_games()
 
             $product = wc_get_product(get_the_ID());
 
+            $platforms_html = '';
+            $platforms = array('Xbox', 'Playstation', 'Nintendo');
+            foreach($platforms as $platform){
+                $platforms_html .= (get_post_meta(get_the_ID(), '_platform_'.strtolower($platform), true ) == 'yes') ? '<div class="platform_'.strtolower($platform).'"></div>' : null;
+            }
+
             $result[] = array(
                     'link' => get_the_permalink(),
                     'thumbnail' => $product->get_image('full'),
                     'price' => $product->get_price_html(),
                     'title' => get_the_title(),
+                    'platforms' => $platforms_html,
             );
         }
     }
@@ -76,11 +83,19 @@ function search_games_by_title()
             $games_query->the_post();
 
             $product = wc_get_product(get_the_ID());
+
+            $platforms_html = '';
+            $platforms = array('Xbox', 'Playstation', 'Nintendo');
+            foreach($platforms as $platform){
+                $platforms_html .= (get_post_meta(get_the_ID(), '_platform_'.strtolower($platform), true ) == 'yes') ? '<div class="platform_'.strtolower($platform).'"></div>' : null;
+            }
+
             $result[] = array(
                     'link' => get_the_permalink(),
                     'thumbnail' => $product->get_image('full'),
                     'price' => $product->get_price_html(),
                     'title' => get_the_title(),
+                    'platforms' => $platforms_html,
             );
         }
     }
