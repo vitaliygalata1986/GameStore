@@ -120,7 +120,7 @@ function view_block_featured_products($attributes)
 		echo '<p>' . $attributes['description'] . '</p>';
 	}
 
-	$platforms = array('Xbox', 'PC', 'PlayStation');
+	$platforms = array('xbox', 'playstation', 'nintendo');
 
 	if (!empty($featured_games)) {
 
