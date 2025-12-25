@@ -145,6 +145,7 @@ body {
     --mask-gradient-second: linear-gradient(180deg, rgba(250, 250, 250, 0.00) 0%, #FAFAFA 100%);
     --accent-gradient: linear-gradient(90deg, #3DAFE2 0%, #6F76C0 100%);
     --divider-input: rgba(14, 13, 15, 0.24);
+    --wp--preset--color--white: rgba(250, 250, 250, 1);
 }
 
 .dark-mode-gamestore {
