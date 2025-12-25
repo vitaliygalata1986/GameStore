@@ -22,6 +22,50 @@ return array(
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
 	),
+	'block-cta' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'blocks-gamestore/block-cta',
+		'version' => '0.1.0',
+		'title' => 'Call to Action',
+		'category' => 'gamestore',
+		'icon' => 'smiley',
+		'description' => 'Call to Action Block',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.cta-title'
+			),
+			'description' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.cta-description'
+			),
+			'links' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'imageBg' => array(
+				'type' => 'string'
+			),
+			'image' => array(
+				'type' => 'string'
+			)
+		),
+		'textdomain' => 'blocks-gamestore',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'block-featured-products' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

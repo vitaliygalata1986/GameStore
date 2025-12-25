@@ -110,42 +110,32 @@ function view_block_featured_products($attributes)
 		'featured' => true,
 	));
 
-//	echo  '<pre>';
-//	print_r($featured_games);
-//	echo  '</pre>';
-
 	ob_start();
-	echo '<div ' . get_block_wrapper_attributes(array('class' => 'wrapper')) . '>';
-	if ($attributes['title']) {
+	echo '<div '. get_block_wrapper_attributes( array('class' => 'alignfull')) .'>';
+	echo '<div class="wrapper">';
+	if($attributes['title']){
 		echo '<h2>' . $attributes['title'] . '</h2>';
 	}
-	if ($attributes['description']) {
+	if($attributes['description']){
 		echo '<p>' . $attributes['description'] . '</p>';
 	}
 
-	$platforms = array('xbox', 'playstation', 'nintendo');
+	$platforms = array('Xbox', 'PC', 'PlayStation');
 
 	if (!empty($featured_games)) {
 
 		echo '<div class="games-list">';
-		foreach ($featured_games as $game) {
-			//	echo  '<pre>';
-			//	print_r($game);
-			//	echo  '</pre>';
-
+		foreach($featured_games as $game){
 			$platforms_html = '';
 			echo '<div class="game-result">';
-			echo '<a href="' . esc_url($game->get_permalink()) . '">';
-			echo '<div class="game-featured-image">' . $game->get_image('full') . '</div>';
+			echo '<a href="'.esc_url($game->get_permalink()).'">';
+			echo '<div class="game-featured-image">'.$game->get_image('full').'</div>';
 			echo '<div class="game-meta">';
-			echo '<div class="game-price">' . $game->get_price_html() . '</div>';
-			echo '<h3>' . $game->get_name() . '</h3>';
+			echo '<div class="game-price">'.$game->get_price_html().'</div>';
+			echo '<h3>'.$game->get_name().'</h3>';
 			echo '<div class="game-platforms">';
-			foreach ($platforms as $platform) {
-//					echo '<pre>';
-//					print_r($platform); // Xbox, PC, PlayStation
-//					echo  '</pre>';
-				$platforms_html .= (get_post_meta($game->get_ID(), '_platform_' . strtolower($platform), true) == 'yes') ? '<div class="platform_' . strtolower($platform) . '"></div>' : null;
+			foreach($platforms as $platform){
+				$platforms_html .= (get_post_meta($game->get_ID(), '_platform_'.strtolower($platform), true ) == 'yes') ? '<div class="platform_'.strtolower($platform).'"></div>' : null;
 			}
 			echo $platforms_html;
 			echo '</div>';
@@ -157,6 +147,7 @@ function view_block_featured_products($attributes)
 	} else {
 		echo '<p>No games found.</p>';
 	}
+	echo '</div>';
 	echo '</div>';
 
 

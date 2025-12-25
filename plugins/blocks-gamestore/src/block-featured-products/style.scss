@@ -1,7 +1,9 @@
 .wp-block-blocks-gamestore-featured-products {
-	margin-top: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem)!important;
-	margin-bottom: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem)!important;
-
+	padding-top: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem)!important;
+	padding-bottom: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem)!important;
+	position: relative;
+	margin-top: 0!important;
+	margin-bottom: 0!important;
 	h2 {
 		line-height: 1.4;
 		background: var(--accent-gradient);
@@ -42,6 +44,25 @@
 			.game-meta h3 {
 				color: var(--text-primary, #0E0D0F);
 			}
+		}
+	}
+}
+
+.dark-mode-gamestore {
+	.wp-block-blocks-gamestore-featured-products {
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: var(--wp--preset--color--base);
+			z-index: 0;
+		}
+		.games-list{
+			position: relative;
+			z-index: 1;
 		}
 	}
 }
