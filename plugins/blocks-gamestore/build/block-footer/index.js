@@ -117,7 +117,7 @@ const LogosRepeater = ({
         onChange: value => updateLogo(index, "url", value),
         placeholder: "https://example.com"
       }), logo.images && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-        src: logo.images,
+        src: logo.image,
         alt: "Background"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
         icon: "format-image",
