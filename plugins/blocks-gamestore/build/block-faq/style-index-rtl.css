@@ -1,0 +1,62 @@
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-faq/style.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blocks-gamestore-block-faq {
+  margin-top: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+  margin-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+}
+.wp-block-blocks-gamestore-block-faq.no-margin {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.wp-block-blocks-gamestore-block-faq .faq-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.wp-block-blocks-gamestore-block-faq .faq-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item {
+  border-radius: 5px;
+  border: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-title {
+  color: var(--text-primary, #0E0D0F);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-title::after {
+  content: "";
+  width: 30px;
+  height: 31px;
+  display: block;
+  background: url("data:image/svg+xml,<svg width=\"30\" height=\"31\" viewBox=\"0 0 30 31\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g clip-path=\"url%28%23clip0_1556_3182%29\"><path d=\"M13.75 30.3179V18.5679H2V17.0679H13.75V5.31787H15.25V17.0679H27V18.5679H15.25V30.3179H13.75Z\" fill=\"url%28%23paint0_linear_1556_3182%29\"/></g><defs><linearGradient id=\"paint0_linear_1556_3182\" x1=\"-1.20377e-07\" y1=\"15.1095\" x2=\"30\" y2=\"15.1095\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"%233DAFE2\"/><stop offset=\"1\" stop-color=\"%236F76C0\"/></linearGradient><clipPath id=\"clip0_1556_3182\"><rect width=\"30\" height=\"30\" fill=\"white\" transform=\"matrix%281 0 0 -1 0 30.3179%29\"/></clipPath></defs></svg>") center center no-repeat;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-title.open::after {
+  background: url("data:image/svg+xml,<svg width=\"30\" height=\"31\" viewBox=\"0 0 30 31\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 17.0679H19V18.5679H3V17.0679Z\" fill=\"url%28%23paint0_linear_1556_3176%29\"/><defs><linearGradient id=\"paint0_linear_1556_3176\" x1=\"-1.20377e-07\" y1=\"15.1095\" x2=\"30\" y2=\"15.1095\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"%233DAFE2\"/><stop offset=\"1\" stop-color=\"%236F76C0\"/></linearGradient></defs></svg>") center center no-repeat;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-description {
+  color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+  line-height: 1.5;
+  display: none;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-description.show {
+  display: block;
+}
+.wp-block-blocks-gamestore-block-faq .faq-item .faq-item-description a {
+  color: var(--purple-main, #6F76C0);
+  text-decoration: none;
+}
