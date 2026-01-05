@@ -78,7 +78,7 @@ const LogosRepeater = ({logos, setLogos}) => {
 						onChange={(value) => updateLogo(index, "url", value)}
 						placeholder="https://example.com"
 					/>
-					{logo.images && <img src={logo.images} alt="Background"/>}
+					{logo.images && <img src={logo.image} alt="Background"/>}
 					<br/>
 					<MediaPlaceholder
 						icon="format-image"
