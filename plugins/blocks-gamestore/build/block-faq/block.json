@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "blocks-gamestore/block-faq",
+  "version": "0.1.0",
+  "title": "FAQs",
+  "category": "gamestore",
+  "icon": "smiley",
+  "description": "FAQs Block",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".faq-title"
+    },
+    "faqs": {
+      "type": "array",
+      "default": []
+    },
+    "margin": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "blocks-gamestore",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

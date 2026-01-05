@@ -136,6 +136,40 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'block-footer' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'blocks-gamestore/block-footer',
+		'version' => '0.1.0',
+		'title' => 'Footer',
+		'category' => 'gamestore',
+		'icon' => 'layout',
+		'description' => 'Site Footer Block',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'copyrights' => array(
+				'type' => 'string'
+			),
+			'logos' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'links' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			)
+		),
+		'textdomain' => 'blocks-gamestore',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'block-games-line' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
