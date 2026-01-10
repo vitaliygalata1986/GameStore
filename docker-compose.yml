@@ -14,33 +14,44 @@ services:
     ports:
       - '3310:3306'
     volumes:
-      # сохраняем данные БД
+      # сохраняем данные БД (слева — папка на компе, справа — папка внутри контейнера)
+      # MySQL хранит все данные в /var/lib/mysql. БД не пропадёт после перезапуска
+      # Данные хранятся на твоём компьютере (хосте) в папке ./.srv/database. Контейнер MySQL просто использует эту папку как свою /var/lib/mysql.
+      # Почему это важно? Если контейнер удалить — данные НЕ удалятся. docker compose down docker compose up -d Контейнер пересоздался, но: папка ./.srv/database осталась → MySQL подхватит старые данные.
       - ./.srv/database:/var/lib/mysql
-  # wordpress - image
+  # wordpress - image Это контейнер WordPress.
   wordpress:
     image: wordpress:latest
     restart: always
+    # сначала запускается MySQL контейнер. потом WordPress
     depends_on:
       - mysql
     links:
       - mysql
+    #WordPress внутри контейнера слушает порт 80
     ports:
       - '8200:80'
     environment:
       # для подключения к БД
-      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_HOST: mysql:3306 # WordPress будет подключаться к базе на mysql:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: gamestore
     volumes:
       # сохраняем данные сайта
-      - wordpress-core:/var/www/html
+      - wordpress-core:/var/www/html # Это означает: /var/www/html в контейнере будет лежать не в контейнере, а в volume wordpress-core. WordPress core (wp-admin/wp-includes и т.д.) будет храниться там
+      # Далее bind mounts:  папка темы берётся с нашего проекта. удобно разрабатывать
+      # Docker НЕ копирует папку themes внутрь контейнера. Он делает “подключение папки” (mount).
+      # То есть контейнер начинает “видеть” твою папку: на хосте (Ubuntu): ./themes/  (в проекте) как будто она лежит внутри контейнера тут: /var/www/html/wp-content/themes/
+      # Ты меняешь файл на хосте: /var/www/gutenberg.loc/themes/mytheme/style.css и внутри контейнера он сразу доступен: /var/www/html/wp-content/themes/mytheme/style.css изменения мгновенно видны в WordPress.
       - ./themes/:/var/www/html/wp-content/themes/
+      # То же самое с плагинами:
       - ./plugins/blocks-gamestore/:/var/www/html/wp-content/plugins/blocks-gamestore/
       - ./plugins/core-gamestore/:/var/www/html/wp-content/plugins/core-gamestore/
       - ./mu-plugins/:/var/www/html/wp-content/mu-plugins/
+      # Это настройка PHP.
       - ./.srv/custom.ini:/usr/local/etc/php/conf.d/custom.ini
-    # phpmyadmin - image
+    # phpmyadmin - image - phpmyadmin сервис Это контейнер phpMyAdmin.
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
@@ -52,8 +63,12 @@ services:
     environment:
       MYSQL_USER_NAME: wordpress
       MYSQL_ROOT_PASSWORD: wordpress
-      PMA_HOST: mysql
+      PMA_HOST: mysql # phpMyAdmin подключается к MySQL контейнеру по имени mysql.
 
-volumes:
-  # теперт докер будет создавать этот volume на стороне Linux
+volumes: # Ты объявляешь named volume. То есть Docker создаст volume с именем wordpress-core.
+  # Этот volume живёт отдельно от контейнеров и отдельно от проекта.
   wordpress-core:
+
+    # MySQL данные → bind mount в ./.srv/database
+    #WordPress core → named volume wordpress-core
+    #WordPress plugins/themes → bind mount прямо из проекта
