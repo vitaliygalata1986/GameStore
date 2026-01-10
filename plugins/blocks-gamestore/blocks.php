@@ -111,12 +111,12 @@ function view_block_featured_products($attributes)
 	));
 
 	ob_start();
-	echo '<div '. get_block_wrapper_attributes( array('class' => 'alignfull')) .'>';
+	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
 	echo '<div class="wrapper">';
-	if($attributes['title']){
+	if ($attributes['title']) {
 		echo '<h2>' . $attributes['title'] . '</h2>';
 	}
-	if($attributes['description']){
+	if ($attributes['description']) {
 		echo '<p>' . $attributes['description'] . '</p>';
 	}
 
@@ -125,17 +125,17 @@ function view_block_featured_products($attributes)
 	if (!empty($featured_games)) {
 
 		echo '<div class="games-list">';
-		foreach($featured_games as $game){
+		foreach ($featured_games as $game) {
 			$platforms_html = '';
 			echo '<div class="game-result">';
-			echo '<a href="'.esc_url($game->get_permalink()).'">';
-			echo '<div class="game-featured-image">'.$game->get_image('full').'</div>';
+			echo '<a href="' . esc_url($game->get_permalink()) . '">';
+			echo '<div class="game-featured-image">' . $game->get_image('full') . '</div>';
 			echo '<div class="game-meta">';
-			echo '<div class="game-price">'.$game->get_price_html().'</div>';
-			echo '<h3>'.$game->get_name().'</h3>';
+			echo '<div class="game-price">' . $game->get_price_html() . '</div>';
+			echo '<h3>' . $game->get_name() . '</h3>';
 			echo '<div class="game-platforms">';
-			foreach($platforms as $platform){
-				$platforms_html .= (get_post_meta($game->get_ID(), '_platform_'.strtolower($platform), true ) == 'yes') ? '<div class="platform_'.strtolower($platform).'"></div>' : null;
+			foreach ($platforms as $platform) {
+				$platforms_html .= (get_post_meta($game->get_ID(), '_platform_' . strtolower($platform), true) == 'yes') ? '<div class="platform_' . strtolower($platform) . '"></div>' : null;
 			}
 			echo $platforms_html;
 			echo '</div>';
@@ -154,6 +154,34 @@ function view_block_featured_products($attributes)
 	// Return the buffered content
 	return ob_get_clean();
 }
+
+function view_block_single_news()
+{
+	ob_start();
+	echo '<article ' . get_block_wrapper_attributes(array('class' => implode(' ', get_post_class('alignfull')))) . '>';
+	echo '<div class="featured-image-section">';
+	echo '<div class="wrapper">';
+	echo '<h1>' . esc_html(get_the_title()) . '</h1>';
+	echo '<div class="news-meta">';
+	echo '<div class="news-date">' . esc_html(get_the_date()) . '</div>';
+	echo '<div class="news-author">' . esc_html(get_the_author()) . '</div>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+
+	echo '<div class="wrapper news-container">';
+	echo '<div class="news-social-share">Share' . gamestore_social_share(get_the_permalink(), get_the_title()) . '</div>';
+	echo '<div class="news-content">' . get_the_content() . '</div>';
+
+	echo '</div>';
+
+	echo '</article>';
+
+	// Return the buffered content
+	return ob_get_clean();
+}
+
+
 
 
 // ob_start() и ob_get_clean() — это функции для управления буфером вывода в PHP.
@@ -203,4 +231,34 @@ WordPress склеит их с теми, что нужны блоку по ум�
 	status => 'publish': только опубликованные товары
 	limit => N: максимум N товаров
 	featured => true: только товары, отмеченные “Featured” в WooCommerce
+ * */
+
+
+/*
+'<article '. get_block_wrapper_attributes( array('class' => implode(' ',get_post_class('alignfull')))) .'>';
+1) get_post_class('alignfull')
+Это WordPress-функция, которая возвращает массив классов для текущего поста (как post_class(), но return, а не echo), плюс добавляет твой класс 'alignfull'.
+
+Примерно вернёт что-то вроде массива:
+
+	[
+	  'post-123',
+	  'post',
+	  'type-post',
+	  'status-publish',
+	  'format-standard',
+	  'alignfull'
+	]
+
+2) implode(' ', get_post_class('alignfull'))
+Склеивает этот массив в одну строку через пробел:
+"post-123 post type-post status-publish format-standard alignfull"
+
+3) get_block_wrapper_attributes([...])
+Это функция для Gutenberg блоков. Она берёт твой массив атрибутов (например class) и возвращает готовую строку атрибутов для HTML-тега.
+Обычно она добавляет ещё свои вещи, например:
+	class="wp-block-..." (если контекст блока есть)
+	иногда style="", id="", data-* и т.п.
+То есть результат может стать примерно таким:
+	class="alignfull post-363 news type-news status-publish has-post-thumbnail hentry wp-block-blocks-gamestore-single-news"
  * */

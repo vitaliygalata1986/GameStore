@@ -1,1 +1,18 @@
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".faq-item").forEach(e=>{const t=e.querySelector(".faq-item-title"),o=e.querySelector(".faq-item-description");t.addEventListener("click",()=>{t.classList.toggle("open"),o.classList.toggle("show")})})});
+/******/ (() => { // webpackBootstrap
+/*!*******************************!*\
+  !*** ./src/block-faq/view.js ***!
+  \*******************************/
+document.addEventListener('DOMContentLoaded', function () {
+  const faqs = document.querySelectorAll('.faq-item');
+  faqs.forEach(faq => {
+    const question = faq.querySelector('.faq-item-title');
+    const answer = faq.querySelector('.faq-item-description');
+    question.addEventListener('click', () => {
+      question.classList.toggle('open');
+      answer.classList.toggle('show');
+    });
+  });
+});
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

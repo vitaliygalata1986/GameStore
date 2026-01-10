@@ -1,1 +1,68 @@
-.wp-block-blocks-gamestore-subscribe{background-size:cover;box-sizing:border-box;margin-block-start:0!important;min-height:500px;padding-bottom:clamp(3.75rem,2.77rem + 4.92vw,7.5rem);padding-top:clamp(3.75rem,2.77rem + 4.92vw,7.5rem);position:relative}.wp-block-blocks-gamestore-subscribe:before{background:var(--mask-gradient);content:"";height:100%;right:0;position:absolute;top:0;width:80%;z-index:0}.wp-block-blocks-gamestore-subscribe .subscribe-inner{align-items:flex-start;display:flex;flex-direction:column;gap:16px;height:100%;justify-content:center;position:relative;z-index:1}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-title{font-size:clamp(3.38rem,3.21rem + .82vw,4rem);max-width:800px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-title strong{background:var(--accent-gradient,linear-gradient(-90deg,#3dafe2 0,#6f76c0 100%));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-description{color:var(--text-secondary);line-height:1.6;max-width:800px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode{margin-top:16px;max-width:800px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-response{color:var(--text-secondary);margin-top:16px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields{align-items:center;display:flex;gap:24px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields input[type=submit]{box-shadow:0 16px 24px 0 rgba(61,175,226,.48);height:60px;padding:20px 32px}.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields input[type=submit]:hover{box-shadow:0 8px 12px -6px rgba(61,175,226,.48)}
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-subscribe/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blocks-gamestore-subscribe {
+  margin-block-start: 0 !important;
+  min-height: 500px;
+  padding-top: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem);
+  padding-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem);
+  box-sizing: border-box;
+  position: relative;
+  background-size: cover;
+}
+.wp-block-blocks-gamestore-subscribe::before {
+  content: "";
+  width: 80%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  background: var(--mask-gradient);
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-title {
+  font-size: clamp(3.38rem, 3.21rem + 0.82vw, 4rem);
+  max-width: 800px;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-title strong {
+  background: var(--accent-gradient, linear-gradient(-90deg, #3DAFE2 0%, #6F76C0 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-description {
+  color: var(--text-secondary);
+  max-width: 800px;
+  line-height: 1.6;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode {
+  margin-top: 16px;
+  max-width: 800px;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-response {
+  margin-top: 16px;
+  color: var(--text-secondary);
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields input[type=submit] {
+  height: 60px;
+  padding: 20px 32px;
+  box-shadow: 0px 16px 24px 0px rgba(61, 175, 226, 0.48);
+}
+.wp-block-blocks-gamestore-subscribe .subscribe-inner .subscribe-shortcode .mc4wp-form-fields input[type=submit]:hover {
+  box-shadow: 0px 8px 12px -6px rgba(61, 175, 226, 0.48);
+}
