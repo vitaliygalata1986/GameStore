@@ -43,7 +43,7 @@ function news_category_add_meta_field()
     <div class="form-field term-group">
         <label for="news_category_icon"><?php _e('Icon', 'core-gamestore'); ?></label>
         <input type="text" id="news_category_icon" name="news_category_icon" value="" class="news-category-icon-field">
-        <button type="button" class="upload-icon-button button"><?php _e('Upload Icon', 'core-gamestore'); ?></button>
+        <button style="margin-top:14px;" type="button" class="upload-icon-button button"><?php _e('Upload Icon', 'core-gamestore'); ?></button>
     </div>
     <?php
 }
