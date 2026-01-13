@@ -61,12 +61,37 @@ add_action('wp_enqueue_scripts','gamestore_google_font_script');
 // Load assets in Gutenberg
 function gamestore_gutenberg_styles(){
     wp_enqueue_style('gamestore-google-font',gamestore_google_font(),[],'1.0.0');
-
     if(is_admin()){
-        add_editor_style('/assets/css/editor-style.css');
+        wp_enqueue_style('gamestore-editor-style',get_template_directory_uri() . '/assets/css/editor-style.css',['gamestore-google-font'],wp_get_theme()->get( 'Version' ));
+        add_editor_style('assets/css/editor-style.css');
     }
 }
 add_action('enqueue_block_editor_assets', 'gamestore_gutenberg_styles');
+add_action('enqueue_block_assets', 'gamestore_gutenberg_styles');
 
-// https://www.youtube.com/watch?v=c8nob2rQ9To&t=36638s
-// 3-38
+// enqueue_block_editor_assets выполняется только в админке редактора.
+
+/*
+ Оба хука (enqueue_block_editor_assets и enqueue_block_assets) — это про подключение ассетов для блоков, но они срабатывают в разных местах и для разной аудитории.
+enqueue_block_editor_assets
+
+Срабатывает только в редакторе:
+
+    Gutenberg editor (редактор записи/страницы)
+    Site Editor (FSE: шаблоны/части шаблонов)
+    Экран виджетов блоками (если используется)
+
+То есть всё, что ты туда подключаешь, увидишь только в админке внутри редактора.
+Типично туда кладут: CSS/JS, которые нужны для отображения блоков в редакторе (editor-only).
+
+
+enqueue_block_assets
+
+Срабатывает и на фронте, и в редакторе:
+    на сайте (frontend), когда рендерятся блоки
+    и в редакторе тоже
+
+То есть это “общие” стили/скрипты для блоков, которые должны работать везде.
+Типично туда кладут: CSS, который нужен и на сайте, и в редакторе, чтобы блоки выглядели одинаково.
+
+ * */

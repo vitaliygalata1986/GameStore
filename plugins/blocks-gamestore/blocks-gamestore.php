@@ -74,6 +74,13 @@ function create_block_blocks_gamestore_block_init() {
 			'render_callback' => 'view_block_single_news',
 		]
 	);
+
+	register_block_type(
+		__DIR__ . '/build/block-news-header',
+		[
+			'render_callback' => 'view_block_news_header',
+		]
+	);
 }
 add_action( 'init', 'create_block_blocks_gamestore_block_init' );
 

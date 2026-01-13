@@ -200,6 +200,50 @@ function view_block_single_news()
 	return ob_get_clean();
 }
 
+function view_block_news_header($attributes)
+{
+
+	$image_bg = !empty($attributes['image'])
+		? 'style="background-image: url(' . esc_url($attributes['image']) . ');"'
+		: '';
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . ' ' . $image_bg . '>';
+
+	echo '<div class="wrapper">';
+
+	if (!empty($attributes['title'])) {
+		echo '<h1 class="news-header-title">' . esc_html($attributes['title']) . '</h1>';
+	}
+
+	if (!empty($attributes['description'])) {
+		echo '<p class="news-header-description">' . esc_html($attributes['description']) . '</p>';
+	}
+
+	$terms_news = get_terms(array(
+		'taxonomy' => 'news_category',
+		'hide_empty' => false,
+	));
+
+	if (!empty($terms_news) && !is_wp_error($terms_news)) {
+		echo '<div class="news-categories">';
+		foreach ($terms_news as $term) {
+			$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
+			$icon_url = $icon_meta
+				? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
+				: null;
+			echo '<div class="news-cat-item"><a href="' . get_term_link($term) . '"> ' . $term->name . $icon_url . ' </a></div>';
+		}
+		echo '</div>';
+	}
+
+	echo '</div>';
+	echo '</div>';
+
+	return ob_get_clean();
+}
+
 
 
 

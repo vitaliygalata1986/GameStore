@@ -1,0 +1,77 @@
+.wp-block-blocks-gamestore-news-header {
+	//max-width: calc(100% + (var(--wp--style--root--padding-right) + var(--wp--style--root--padding-left)))!important;
+	//margin-right: calc(var(--wp--style--root--padding-right) * -1) !important;
+	//margin-left: calc(var(--wp--style--root--padding-left) * -1) !important;
+	text-align: center;
+	position: relative;
+	background-size: cover;
+	padding-top: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem) !important;
+	padding-bottom: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem) !important;
+	margin-top: 0;
+	margin-bottom: 0;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(180deg, var(--background-default) 0%, var(--background-80) 50.06%, var(--background-default) 100%);
+		z-index: 0;
+	}
+
+	h1 {
+		line-height: 1.4;
+		margin-top: 0;
+		margin-bottom: 24px;
+		text-align: center;
+		width: fit-content;
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		font-size: clamp(2.25rem, calc(1.95rem + 1.48vw), 3.38rem);
+	}
+
+	p {
+		margin-top: 0;
+		max-width: 980px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 48px;
+		position: relative;
+		z-index: 1;
+		color: var(--text-secondary, rgba(14, 13, 15, 0.70));
+	}
+
+	.wrapper {
+		position: relative;
+		z-index: 1;
+
+		.news-categories {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 24px;
+			margin-top: 48px;
+
+			.news-cat-item a {
+				border-radius: 16px;
+				border: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+				background: var(--background-2, rgba(250, 250, 250, 0.02));
+				backdrop-filter: blur(4px);
+				padding: 24px;
+				box-sizing: border-box;
+				color: var(--text-primary, #0E0D0F);
+				font-size: 14px;
+				font-weight: 700;
+				letter-spacing: 2.1px;
+				text-transform: uppercase;
+				display: flex;
+				gap: 24px;
+				align-items: center;
+				text-decoration: none;
+			}
+		}
+	}
+}
