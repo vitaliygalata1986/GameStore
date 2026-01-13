@@ -18,6 +18,9 @@ if (!defined('ABSPATH')) {
 }
 
 define('BLOCKS_GAMESTORE_PATH', plugin_dir_path(__FILE__));
+
+define('BLOCKS_GAMESTORE_URL', plugin_dir_url(__FILE__)); // http://localhost:8200/wp-content/plugins/blocks-gamestore/
+
 require_once( BLOCKS_GAMESTORE_PATH . 'blocks.php' );
 
 // зарегестририруем новую категорию gamestore для нашего плагина block-header

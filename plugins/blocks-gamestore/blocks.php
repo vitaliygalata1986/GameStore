@@ -158,9 +158,14 @@ function view_block_featured_products($attributes)
 function view_block_single_news()
 {
 	ob_start();
+	$placeholder_url = trailingslashit(BLOCKS_GAMESTORE_URL) . 'assets/img/placeholder.png';
 
 	$bg_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-	$bg_img = $bg_url ? 'style="background-image: url(' . esc_url($bg_url) . ')"' : '';
+	if (!$bg_url) {
+		$bg_url = $placeholder_url;
+	}
+
+	$bg_img = 'style="background-image: url(\'' . esc_url($bg_url) . '\');"';
 
 	echo '<article ' . get_block_wrapper_attributes(array('class' => implode(' ', get_post_class('alignfull')))) . '>';
 	echo '<div class="featured-image-section" ' . $bg_img . '>';
@@ -324,4 +329,12 @@ WordPress склеит их с теми, что нужны блоку по ум�
 	иногда style="", id="", data-* и т.п.
 То есть результат может стать примерно таким:
 	class="alignfull post-363 news type-news status-publish has-post-thumbnail hentry wp-block-blocks-gamestore-single-news"
+ * */
+
+
+/*
+ trailingslashit() — это WordPress-функция, которая гарантирует слэш / в конце строки.
+	Если слэша нет → добавит.
+	Если уже есть → оставит как есть.
+	Нужна, чтобы нормально склеивать пути/URL и не получить ошибки типа ...pluginsblocks-gamestorebuild/... или двойные слэши.
  * */
