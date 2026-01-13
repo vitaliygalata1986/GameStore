@@ -158,9 +158,14 @@ function view_block_featured_products($attributes)
 function view_block_single_news()
 {
 	ob_start();
+	$placeholder_url = trailingslashit(BLOCKS_GAMESTORE_URL) . 'assets/img/placeholder.png';
 
 	$bg_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-	$bg_img = $bg_url ? 'style="background-image: url(' . esc_url($bg_url) . ')"' : '';
+	if (!$bg_url) {
+		$bg_url = $placeholder_url;
+	}
+
+	$bg_img = 'style="background-image: url(\'' . esc_url($bg_url) . '\');"';
 
 	echo '<article ' . get_block_wrapper_attributes(array('class' => implode(' ', get_post_class('alignfull')))) . '>';
 	echo '<div class="featured-image-section" ' . $bg_img . '>';
@@ -197,6 +202,50 @@ function view_block_single_news()
 	echo '</article>';
 
 	// Return the buffered content
+	return ob_get_clean();
+}
+
+function view_block_news_header($attributes)
+{
+
+	$image_bg = !empty($attributes['image'])
+		? 'style="background-image: url(' . esc_url($attributes['image']) . ');"'
+		: '';
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . ' ' . $image_bg . '>';
+
+	echo '<div class="wrapper">';
+
+	if (!empty($attributes['title'])) {
+		echo '<h1 class="news-header-title">' . esc_html($attributes['title']) . '</h1>';
+	}
+
+	if (!empty($attributes['description'])) {
+		echo '<p class="news-header-description">' . esc_html($attributes['description']) . '</p>';
+	}
+
+	$terms_news = get_terms(array(
+		'taxonomy' => 'news_category',
+		'hide_empty' => false,
+	));
+
+	if (!empty($terms_news) && !is_wp_error($terms_news)) {
+		echo '<div class="news-categories">';
+		foreach ($terms_news as $term) {
+			$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
+			$icon_url = $icon_meta
+				? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
+				: null;
+			echo '<div class="news-cat-item"><a href="' . get_term_link($term) . '"> ' . $term->name . $icon_url . ' </a></div>';
+		}
+		echo '</div>';
+	}
+
+	echo '</div>';
+	echo '</div>';
+
 	return ob_get_clean();
 }
 
@@ -280,4 +329,12 @@ WordPress склеит их с теми, что нужны блоку по ум�
 	иногда style="", id="", data-* и т.п.
 То есть результат может стать примерно таким:
 	class="alignfull post-363 news type-news status-publish has-post-thumbnail hentry wp-block-blocks-gamestore-single-news"
+ * */
+
+
+/*
+ trailingslashit() — это WordPress-функция, которая гарантирует слэш / в конце строки.
+	Если слэша нет → добавит.
+	Если уже есть → оставит как есть.
+	Нужна, чтобы нормально склеивать пути/URL и не получить ошибки типа ...pluginsblocks-gamestorebuild/... или двойные слэши.
  * */
