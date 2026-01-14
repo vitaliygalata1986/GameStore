@@ -6,8 +6,8 @@
   background-size: cover !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  padding-top: clamp(3.75rem, 2.77rem + 4.92vw, 9rem) !important;
-  padding-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 8.5rem) !important;
+  padding-top: clamp(2.625rem, 1.939rem + 3.444vw, 5.95rem) !important;
+  padding-bottom: clamp(2.625rem, 1.939rem + 3.444vw, 5.95rem) !important;
 }
 .wp-block-blocks-gamestore-block-cta::before {
   content: "";

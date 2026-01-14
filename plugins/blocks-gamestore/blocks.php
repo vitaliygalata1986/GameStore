@@ -249,6 +249,30 @@ function view_block_news_header($attributes)
 	return ob_get_clean();
 }
 
+function view_block_news_box()
+{
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . '>'; // сюда попадут атрибуты из useBlockProps
+
+	$title = get_the_title();
+
+	if (has_post_thumbnail()) {
+		$thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+
+		echo '<h3>' . esc_html($title) . '</h3>';
+		echo '<div class="news-thumbnail">';
+		echo '<img src="' . esc_url($thumb_url) . '" class="blur-image" alt="' . esc_attr($title) . '">';
+		echo '<img src="' . esc_url($thumb_url) . '" class="original-image" alt="' . esc_attr($title) . '">';
+		echo '</div>';
+	}
+
+	echo '<div class="news-excerpt">' . esc_html(get_the_excerpt()) . '</div>';
+	echo '<a href="' . esc_url(get_the_permalink()) . '" class="read-more">Open the post</a>';
+	echo '</div>';
+
+	return ob_get_clean();
+}
 
 
 
