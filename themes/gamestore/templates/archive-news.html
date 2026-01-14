@@ -2,4 +2,24 @@
 
 <!-- wp:blocks-gamestore/news-header {"title":"Latest News","description":"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.","image":"http://localhost:8200/wp-content/uploads/2026/01/top.png"} /-->
 
+<!-- wp:query {"queryId":4,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"className":"wrapper","layout":{"type":"constrained"}} -->
+<div class="wp-block-query wrapper"><!-- wp:post-template {"className":"news-section-wrapper"} -->
+    <!-- wp:blocks-gamestore/news-box /-->
+    <!-- /wp:post-template -->
+
+    <!-- wp:query-no-results -->
+    <!-- wp:paragraph -->
+    <p>No results found.</p>
+    <!-- /wp:paragraph -->
+    <!-- /wp:query-no-results -->
+
+    <!-- wp:query-pagination -->
+    <!-- wp:query-pagination-numbers /-->
+    <!-- /wp:query-pagination --></div>
+<!-- /wp:query -->
+
+<!-- wp:blocks-gamestore/block-cta {"links":[{"url":"#","anchor":"Game Store"},{"url":"#","anchor":"Services"},{"url":"#","anchor":"Downloads"}],"imageBg":"http://localhost:8200/wp-content/uploads/2025/12/support-1.png","image":"http://localhost:8200/wp-content/uploads/2025/12/Group-62.png"} -->
+<div class="wp-block-blocks-gamestore-block-cta alignfull" style="background:url(http://localhost:8200/wp-content/uploads/2025/12/support-1.png)"><div class="wrapper cta-inner"><div class="left-part"><h2 class="cta-title">Embark On High-Stakes Missions</h2><p class="cta-description">Take on high-risk, high-reward missions from the galaxy’s crime syndicates. Steal valuable goods, infiltrate secret locations, and outwit enemies as one of the galaxy’s most wanted. Every choice you make influences your ever-changing reputation.</p><div class="links-list"><p><a href="#" target="_blank" rel="noopener noreferrer">Game Store</a></p><p><a href="#" target="_blank" rel="noopener noreferrer">Services</a></p><p><a href="#" target="_blank" rel="noopener noreferrer">Downloads</a></p></div></div><div class="right-part"><img class="image-cta" src="http://localhost:8200/wp-content/uploads/2025/12/Group-62.png" alt="CTA"/></div></div></div>
+<!-- /wp:blocks-gamestore/block-cta -->
+
 <!-- wp:template-part {"slug":"footer","theme":"gamestore","tagName":"footer","className":"site-footer"} /-->
