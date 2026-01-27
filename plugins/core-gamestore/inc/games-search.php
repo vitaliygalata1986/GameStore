@@ -45,7 +45,7 @@ function load_latest_games()
             $product = wc_get_product(get_the_ID());
 
             $platforms_html = '';
-            $platforms = array('Xbox', 'Playstation', 'Nintendo');
+            $platforms = get_gamestore_platforms();
             foreach($platforms as $platform){
                 $platforms_html .= (get_post_meta(get_the_ID(), '_platform_'.strtolower($platform), true ) == 'yes') ? '<div class="platform_'.strtolower($platform).'"></div>' : null;
             }

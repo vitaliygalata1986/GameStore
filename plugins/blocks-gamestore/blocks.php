@@ -2,95 +2,127 @@
 
 function view_block_games_line($attributes)
 {
-	// print_r($attributes); // Array ( [count] => 10 )
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 10;
+
 	$args = array(
 		'post_type' => 'product',
-		'posts_per_page' => $attributes['count'],
+		'posts_per_page' => $count,
 		'orderby' => 'date',
 		'order' => 'DESC',
 	);
+
 	$games_query = new WP_Query($args);
 
-	// Start output buffering
 	ob_start();
-	echo '<div ' . get_block_wrapper_attributes() . '>'; // главный контейнер
+
+	echo '<div ' . get_block_wrapper_attributes() . '>'; // // сюда попадут атрибуты из useBlockProps
+
 	if ($games_query->have_posts()) {
 		echo '<div class="games-line-container"><div class="swiper-wrapper">';
+
 		while ($games_query->have_posts()) {
 			$games_query->the_post();
+
 			$product = wc_get_product(get_the_ID());
+			if (!$product) {
+				continue;
+			}
+
 			echo '<div class="swiper-slide game-item">';
-			echo '<a href="' . get_the_permalink() . '">';
+			echo '<a href="' . esc_url(get_permalink()) . '">';
 			echo $product->get_image('full');
 			echo '</a>';
 			echo '</div>';
 		}
+
 		echo '</div></div>';
 	}
-	echo '</div>';
 
+	echo '</div>';
 
 	wp_reset_postdata();
 
-	// Return the buffered content
 	return ob_get_clean();
 }
 
 function view_block_recent_news($attributes)
 {
-	// print_r($attributes);
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 3;
+
 	$args = array(
 		'post_type' => 'news',
-		'posts_per_page' => $attributes['count'],
+		'posts_per_page' => $count,
 		'orderby' => 'date',
 		'order' => 'DESC',
 	);
+
 	$news_query = new WP_Query($args);
 
-	$image_bg = ($attributes['image']) ? 'style="background-image: url(' . $attributes['image'] . ')"' : '';
+	$image_bg = !empty($attributes['image'])
+		? 'style="background-image: url(' . esc_url($attributes['image']) . ')"'
+		: '';
 
 	ob_start();
-	echo '<div ' . get_block_wrapper_attributes() . $image_bg . '>';
+
+	echo '<div ' . get_block_wrapper_attributes() . (!empty($image_bg) ? ' ' . $image_bg : '') . '>';
+
 	if ($news_query->have_posts()) {
-		if ($attributes['title']) {
-			echo '<h2>' . $attributes['title'] . '</h2>';
+
+		if (!empty($attributes['title'])) {
+			echo '<h2>' . esc_html($attributes['title']) . '</h2>';
 		}
-		if ($attributes['description']) {
-			echo '<p>' . $attributes['description'] . '</p>';
+
+		if (!empty($attributes['description'])) {
+			echo '<p>' . esc_html($attributes['description']) . '</p>';
 		}
+
 		echo '<div class="recent-news wrapper">';
+
 		while ($news_query->have_posts()) {
 			$news_query->the_post();
+
+			$title = get_the_title();
+			$link = get_permalink();
+
 			echo '<div class="news-item">';
+
 			if (has_post_thumbnail()) {
-				echo '<h3>' . get_the_title() . '</h3>';
+				$thumb = get_the_post_thumbnail_url(get_the_ID(), 'full');
+
+				echo '<h3>' . esc_html($title) . '</h3>';
 				echo '<div class="news-thumbnail">';
-				echo '<img src="' . get_the_post_thumbnail_url() . '" class="blur-image" alt="' . get_the_title() . '">';
-				echo '<img src="' . get_the_post_thumbnail_url() . '" class="original-image" alt="' . get_the_title() . '">';
+				echo '<img src="' . esc_url($thumb) . '" class="blur-image" alt="' . esc_attr($title) . '">';
+				echo '<img src="' . esc_url($thumb) . '" class="original-image" alt="' . esc_attr($title) . '">';
 				echo '</div>';
 			}
-			echo '<div class="news-excerpt">' . get_the_excerpt() . '</div>';
-			echo '<a href="' . get_the_permalink() . '" class="read-more">Open the post</a>';
+
+			echo '<div class="news-excerpt">' . esc_html(get_the_excerpt()) . '</div>';
+			echo '<a href="' . esc_url($link) . '" class="read-more">Open the post</a>';
+
 			echo '</div>';
 		}
+
 		echo '</div>';
+
 	} else {
 		echo '<p>No recent news found.</p>';
 	}
+
 	echo '</div>';
 
 	wp_reset_postdata();
 
-	// Return the buffered content
 	return ob_get_clean();
 }
 
 function view_block_subscribe($attributes)
 {
-	$image_bg = ($attributes['image']) ? 'style="background-image: url(' . $attributes['image'] . ')"' : '';
+	$image_bg = !empty($attributes['image'])
+		? 'style="background-image: url(' . esc_url($attributes['image']) . ')"'
+		: '';
 	// передаваймый нами класс из 	<div {...useBlockProps({ className: 'alignfull',   (edit.js) -> будет подхватываться функцией get_block_wrapper_attributes
 	ob_start();
-	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . $image_bg . '>';
+	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . (!empty($image_bg) ? ' ' . $image_bg : '') . '>';
 	echo '<div class="subscribe-inner wrapper">';
 	echo '<h2 class="subscribe-title"> ' . $attributes['title'] . ' </h2>';
 	echo '<p class="subscribe-description"> ' . $attributes['description'] . ' </p>';
@@ -103,55 +135,74 @@ function view_block_subscribe($attributes)
 
 function view_block_featured_products($attributes)
 {
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 6;
 
 	$featured_games = wc_get_products(array(
 		'status' => 'publish',
-		'limit' => $attributes['count'],
+		'limit' => $count,
 		'featured' => true,
 	));
 
 	ob_start();
+
 	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
 	echo '<div class="wrapper">';
-	if ($attributes['title']) {
-		echo '<h2>' . $attributes['title'] . '</h2>';
-	}
-	if ($attributes['description']) {
-		echo '<p>' . $attributes['description'] . '</p>';
+
+	if (!empty($attributes['title'])) {
+		echo '<h2>' . esc_html($attributes['title']) . '</h2>';
 	}
 
-	$platforms = array('xbox', 'playstation', 'nintendo');
+	if (!empty($attributes['description'])) {
+		echo '<p>' . esc_html($attributes['description']) . '</p>';
+	}
+
+	$platforms = get_gamestore_platforms();
 
 	if (!empty($featured_games)) {
 
 		echo '<div class="games-list">';
+
 		foreach ($featured_games as $game) {
+			if (!$game instanceof WC_Product) {
+				continue;
+			}
+
 			$platforms_html = '';
+
 			echo '<div class="game-result">';
 			echo '<a href="' . esc_url($game->get_permalink()) . '">';
 			echo '<div class="game-featured-image">' . $game->get_image('full') . '</div>';
 			echo '<div class="game-meta">';
 			echo '<div class="game-price">' . $game->get_price_html() . '</div>';
-			echo '<h3>' . $game->get_name() . '</h3>';
+			echo '<h3>' . esc_html($game->get_name()) . '</h3>';
 			echo '<div class="game-platforms">';
-			foreach ($platforms as $platform) {
-				$platforms_html .= (get_post_meta($game->get_ID(), '_platform_' . strtolower($platform), true) == 'yes') ? '<div class="platform_' . strtolower($platform) . '"></div>' : null;
+
+			if (!empty($platforms) && is_array($platforms)) {
+				foreach ($platforms as $slug => $label) {
+					$has_platform = get_post_meta($game->get_id(), '_platform_' . strtolower($slug), true);
+					if ($has_platform === 'yes') {
+						$platforms_html .= '<div class="platform_' . esc_attr(strtolower($slug)) . '"></div>';
+					}
+				}
 			}
+
 			echo $platforms_html;
-			echo '</div>';
-			echo '</div>';
+
+			echo '</div>'; // .game-platforms
+			echo '</div>'; // .game-meta
 			echo '</a>';
-			echo '</div>';
+			echo '</div>'; // .game-result
 		}
+
 		echo '</div>';
+
 	} else {
 		echo '<p>No games found.</p>';
 	}
-	echo '</div>';
-	echo '</div>';
 
+	echo '</div>'; // .wrapper
+	echo '</div>'; // block wrapper
 
-	// Return the buffered content
 	return ob_get_clean();
 }
 
@@ -195,8 +246,7 @@ function view_block_single_news()
 
 	echo '<div class="wrapper news-container">';
 	echo '<div class="news-social-share">Share' . gamestore_social_share(get_the_permalink(), get_the_title()) . '</div>';
-	echo '<div class="news-content">' . get_the_content() . '</div>';
-
+	echo '<div class="news-content">' . apply_filters('the_content', get_the_content()) . '</div>';
 	echo '</div>';
 
 	echo '</article>';
@@ -207,15 +257,13 @@ function view_block_single_news()
 
 function view_block_news_header($attributes)
 {
-
 	$image_bg = !empty($attributes['image'])
 		? 'style="background-image: url(' . esc_url($attributes['image']) . ');"'
 		: '';
 
 	ob_start();
 
-	echo '<div ' . get_block_wrapper_attributes() . ' ' . $image_bg . '>';
-
+	echo '<div ' . get_block_wrapper_attributes() . (!empty($image_bg) ? ' ' . $image_bg : '') . '>';
 	echo '<div class="wrapper">';
 
 	if (!empty($attributes['title'])) {
@@ -233,13 +281,20 @@ function view_block_news_header($attributes)
 
 	if (!empty($terms_news) && !is_wp_error($terms_news)) {
 		echo '<div class="news-categories">';
+
 		foreach ($terms_news as $term) {
 			$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
-			$icon_url = $icon_meta
+
+			$icon_html = $icon_meta
 				? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
-				: null;
-			echo '<div class="news-cat-item"><a href="' . get_term_link($term) . '"> ' . $term->name . $icon_url . ' </a></div>';
+				: '';
+
+			echo '<div class="news-cat-item"><a href="' . esc_url(get_term_link($term)) . '">'
+				. esc_html($term->name)
+				. $icon_html
+				. '</a></div>';
 		}
+
 		echo '</div>';
 	}
 
@@ -273,6 +328,125 @@ function view_block_news_box()
 
 	return ob_get_clean();
 }
+
+function view_block_single_game()
+{
+	$game = wc_get_product(get_the_ID());
+	if (!$game) {
+		return '';
+	}
+
+	$img = get_post_meta($game->get_id(), '_gamestore_image', true);
+	$game_badge = $img ? sprintf('<img src="%s" alt="" />', esc_url($img)) : '';
+
+	$publisher_meta = get_post_meta($game->get_id(), '_gamestore_publisher', true);
+	$publisher = $publisher_meta
+		? '<div class="game-publisher"><div class="label-text">Publisher</div> <div class="item-text">' . esc_html($publisher_meta) . '</div></div>'
+		: '';
+
+	$single_player_meta = get_post_meta($game->get_id(), '_gamestore_single_player', true);
+	$single_player = $single_player_meta
+		? '<div class="game-single-player"><div class="label-text">Single Player</div> <div class="item-text">' . esc_html($single_player_meta) . '</div></div>'
+		: '';
+
+	$release_date_meta = get_post_meta($game->get_id(), '_gamestore_released_date', true);
+	$release_date = $release_date_meta
+		? '<div class="game-release-date"><div class="label-text">Released</div> <div class="item-text">' . esc_html(date('j F Y', strtotime($release_date_meta))) . '</div></div>'
+		: '';
+
+	$game_full_description_meta = get_post_meta($game->get_id(), '_gamestore_full_description', true);
+	$game_full_description = $game_full_description_meta
+		? '<div class="game-release-date"><h4>Game Description:</h4> ' . wp_kses_post($game_full_description_meta) . '</div>'
+		: '';
+
+	$platforms_terms = wp_get_post_terms($game->get_id(), 'platforms');
+	$platforms_html = '';
+	if (!empty($platforms_terms) && !is_wp_error($platforms_terms)) {
+		$platforms_html .= '<div class="game-platforms-text"><div class="label-text">Platforms</div>';
+		foreach ($platforms_terms as $platform) {
+			$platforms_html .= '<div class="item-text"><a href="' . esc_url(get_term_link($platform)) . '">' . esc_html($platform->name) . '</a></div>';
+		}
+		$platforms_html .= '</div>';
+	}
+
+	$genres_terms = wp_get_post_terms($game->get_id(), 'genres');
+	$genres_html = '';
+	if (!empty($genres_terms) && !is_wp_error($genres_terms)) {
+		$genres_html .= '<div class="game-genres"><div class="label-text">Genres</div>';
+		foreach ($genres_terms as $genre) {
+			$genres_html .= '<div class="item-text"><a href="' . esc_url(get_term_link($genre)) . '">' . esc_html($genre->name) . '</a></div>';
+		}
+		$genres_html .= '</div>';
+	}
+
+	$game_screens_images = $game->get_gallery_image_ids();
+	$game_screens_html = '';
+	if (!empty($game_screens_images)) {
+		$game_screens_html .= '<div class="game-screens"><h4>Videos & Game Play:</h4><div class="game-single-slider"><div class="swiper-wrapper">';
+		foreach ($game_screens_images as $image_id) {
+			$game_screens_html .= '<div class="game-screen swiper-slide">' . wp_get_attachment_image($image_id, 'full') . '</div>';
+		}
+		$game_screens_html .= '</div><div class="swiper-game-next"></div><div class="swiper-game-prev"></div></div></div>';
+	}
+
+	$languages = wp_get_post_terms($game->get_id(), 'languages');
+	$languages_html = '';
+	if (!empty($languages) && !is_wp_error($languages)) {
+		foreach ($languages as $language) {
+			$languages_html .= '<div class="language-item">' . esc_html($language->name) . '</div>';
+		}
+	}
+
+	$short_desc = apply_filters('woocommerce_short_description', $game->get_short_description());
+	$short_desc = wp_kses_post($short_desc);
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . '>';
+	echo '<div class="wrapper">';
+
+	echo '<aside class="game-image">';
+	echo '<div class="game-image-container">' . $game->get_image('large') . '</div>';
+
+	echo '<div class="game-platforms">';
+	$platforms = get_gamestore_platforms(); // slug => label
+	foreach ($platforms as $slug => $label) {
+		if (get_post_meta($game->get_id(), '_platform_' . strtolower($slug), true) === 'yes') {
+			echo '<div class="platform_' . esc_attr(strtolower($slug)) . '"></div>';
+		}
+	}
+	echo '</div>';
+
+	echo '</aside>';
+
+	echo '<div class="game-content">';
+	echo '<div class="game-description-top"><h1>' . esc_html($game->get_name()) . '</h1> ' . $game_badge . ' </div>';
+	echo '<div class="game-languages">' . $languages_html . '</div>';
+	echo '<div class="game-description">' . $short_desc . '</div>';
+
+	echo '<div class="game-meta-data">';
+	echo $platforms_html;
+	echo $genres_html;
+	echo $publisher;
+	echo $single_player;
+	echo $release_date;
+	echo '</div>';
+
+	echo '<div class="game-price-button">';
+	echo '<div class="game-price">' . $game->get_price_html() . '</div>';
+	echo '<div class="game-add-to-cart"><a class="hero-button shadow" href="' . esc_url($game->add_to_cart_url()) . '">' . esc_html($game->add_to_cart_text()) . '</a></div>';
+	echo '</div>';
+
+	echo $game_screens_html;
+	echo $game_full_description;
+
+	echo '</div>'; // .game-content
+	echo '</div>'; // .wrapper
+	echo '</div>'; // block wrapper
+
+	return ob_get_clean();
+}
+
 
 
 
@@ -361,4 +535,12 @@ WordPress склеит их с теми, что нужны блоку по ум�
 	Если слэша нет → добавит.
 	Если уже есть → оставит как есть.
 	Нужна, чтобы нормально склеивать пути/URL и не получить ошибки типа ...pluginsblocks-gamestorebuild/... или двойные слэши.
+
+
+
+is_wp_error() — это функция WordPress, которая проверяет: является ли переменная объектом ошибки WP_Error.
+	Зачем это тут:
+		wp_get_post_terms() обычно возвращает массив терминов (языков).
+		Но если что-то пошло не так (неверная таксономия, проблема с БД и т.п.), она может вернуть WP_Error.
+	Если не проверить и попытаться сделать foreach по WP_Error, получишь предупреждения/ошибки и кривой вывод.
  * */
