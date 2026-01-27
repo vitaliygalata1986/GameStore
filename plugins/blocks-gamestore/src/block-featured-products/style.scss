@@ -47,22 +47,3 @@
 		}
 	}
 }
-
-.dark-mode-gamestore {
-	.wp-block-blocks-gamestore-featured-products {
-		&::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: var(--wp--preset--color--base);
-			z-index: 0;
-		}
-		.games-list{
-			position: relative;
-			z-index: 1;
-		}
-	}
-}
