@@ -1,0 +1,274 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-single-game/style.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+.wc-block-store-notices {
+  width: 100%;
+  max-width: 1540px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body.single-product {
+  overflow: visible !important;
+}
+
+body.single-product .links-list {
+  max-width: 614px;
+}
+
+.wp-block-blocks-gamestore-single-game {
+  padding-top: 48px !important;
+  padding-bottom: 120px !important;
+  margin-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem);
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper {
+  display: flex;
+  gap: 48px;
+  justify-content: space-between;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image {
+  width: 440px;
+  height: 650px;
+  min-height: 200px;
+  position: sticky;
+  top: 48px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-image-container {
+  width: 100%;
+  height: 600px;
+  margin-bottom: 24px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 24px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_xbox {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><g clip-path=\"url%28%23clip0_1513_4019%29\"><path d=\"M14.4492 12.4296C16.1797 14.5507 16.9766 16.289 16.5742 17.0664C16.2656 17.6562 14.3594 18.8085 12.957 19.25C11.8008 19.6132 10.2852 19.7695 9.03517 19.6484C7.54298 19.5039 6.03126 18.9687 4.73439 18.125C3.64454 17.414 3.39845 17.121 3.39845 16.539C3.39845 15.371 4.68361 13.3242 6.88282 10.9882C8.13282 9.66401 9.87111 8.10933 10.0625 8.15229C10.4297 8.23433 13.3555 11.0859 14.4492 12.4296ZM7.3672 5.61714C6.20704 4.56636 5.09767 3.51167 3.9922 3.14058C3.39845 2.94136 3.35548 2.95308 2.87111 3.45698C1.73048 4.64448 0.781262 6.57026 0.515637 8.23823C0.3047 9.57417 0.277356 9.94917 0.351575 10.6015C0.570325 12.5742 1.02736 13.9375 1.93361 15.3242C2.3047 15.8945 2.40626 16 2.29689 15.7109C2.13283 15.2812 2.28517 14.246 2.66798 13.2109C3.22658 11.6875 4.77345 8.80073 7.3672 5.61714ZM19.5391 8.09761C18.8789 4.97261 16.9024 3.00776 16.625 3.00776C16.3399 3.00776 15.6797 3.26167 15.2188 3.55073C14.3086 4.11714 13.6172 4.77729 12.707 5.61323C14.3633 7.69526 16.6992 11.0585 17.5078 13.5156C17.7735 14.3242 17.8867 15.121 17.7969 15.5585C17.7305 15.8906 17.7305 15.8906 17.8516 15.7382C18.0899 15.4375 18.6289 14.5156 18.8438 14.039C19.1328 13.4062 19.4297 12.4687 19.5703 11.746C19.7383 10.8671 19.7227 8.98042 19.5391 8.09761ZM5.51954 1.67964C7.38283 1.58198 9.8047 3.02729 9.98439 3.06245C10.0117 3.06636 10.3906 2.89839 10.8281 2.68354C13.3242 1.4687 14.5 1.67573 15.0235 1.69917C12.5274 0.164013 9.05861 -0.253956 5.88673 1.24214C4.97267 1.67573 4.94923 1.70698 5.51954 1.67964Z\" fill=\"%230E0D0F\"/></g><defs><clipPath id=\"clip0_1513_4019\"><rect width=\"20\" height=\"20\" fill=\"white\"/></clipPath></defs></svg>") center center no-repeat;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_microsoft {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M1.32812 16.3555L8.32581 17.369V10.674H1.32812V16.3555ZM1.32812 9.71764H8.32581V3.02193L1.32812 4.03546V9.71764ZM9.28219 17.5077L18.6717 18.8676V10.674H9.28219V17.5077ZM9.28219 2.88293V9.71764H18.6717V1.52368L9.28219 2.88293Z\" fill=\"%230E0D0F\"/></svg>") center center no-repeat;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_playstation {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"20\" viewBox=\"0 0 25 20\" fill=\"none\"><path d=\"M24.3987 15.0412C23.9171 15.6489 22.7385 16.0813 22.7385 16.0813L13.9748 19.2292V16.9075L20.4245 14.6104C21.1569 14.3488 21.2692 13.9765 20.6738 13.7826C20.0799 13.5872 19.0044 13.6441 18.2736 13.9057L13.9748 15.4197V13.0102L14.2225 12.9272C14.2225 12.9272 15.4641 12.4871 17.2104 12.2933C18.9567 12.1009 21.0953 12.3194 22.7739 12.9549C24.6664 13.5549 24.8787 14.435 24.3987 15.0412ZM14.8087 11.0901V5.15115C14.8087 4.45417 14.681 3.81258 14.0271 3.63102C13.5255 3.46947 13.2147 3.93566 13.2147 4.6311V19.5L9.20514 18.2276V0.5C10.9099 0.816949 13.3932 1.5647 14.7287 2.01551C18.1243 3.18022 19.2752 4.6311 19.2752 7.9006C19.2752 11.087 17.3089 12.2948 14.8087 11.0885V11.0901ZM1.84763 16.6675C-0.0940704 16.1166 -0.417173 14.9781 0.467514 14.3227C1.28604 13.7165 2.67692 13.261 2.67692 13.261L8.42662 11.2147V13.5457L4.28782 15.0273C3.55853 15.2889 3.44622 15.6597 4.04011 15.8551C4.63401 16.049 5.70948 15.9936 6.4403 15.732L8.42508 15.0104V17.0967L8.02966 17.1629C5.95906 17.4981 3.83809 17.3276 1.84763 16.6659V16.6675Z\" fill=\"%230E0D0F\"/></svg>") center center no-repeat;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content {
+  width: calc(100% - 488px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content h4 {
+  color: var(--text-primary, #0E0D0F);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 120%;
+  margin-bottom: 24px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content strong {
+  font-weight: 700;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider {
+  overflow: hidden;
+  position: relative;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider img {
+  border-radius: 30px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-next,
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-prev {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: var(--accent-gradient);
+  border-radius: 100%;
+  display: block;
+  width: 64px;
+  height: 64px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-next::before,
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-prev::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: block;
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M14.9998 19.9201L8.47984 13.4001C7.70984 12.6301 7.70984 11.3701 8.47984 10.6001L14.9998 4.08008\" stroke=\"white\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>");
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-next {
+  bottom: 84px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .swiper-game-next::before {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7.9025 19.9201L14.4225 13.4001C15.1925 12.6301 15.1925 11.3701 14.4225 10.6001L7.9025 4.08008\" stroke=\"white\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>");
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-description-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-description-top h1 {
+  font-size: clamp(2.25rem, 1.95rem + 1.48vw, 3.38rem);
+  max-width: 650px;
+  margin: 0;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-description p {
+  margin: 0;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-languages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-languages .language-item {
+  border-radius: 24px;
+  background: rgba(61, 175, 226, 0.08);
+  color: var(--text-primary, #0E0D0F);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data > div {
+  border-bottom: 1px dashed var(--divider-main, rgba(14, 13, 15, 0.08));
+  color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data > div:last-child {
+  border: 0;
+  padding: 0;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data > div .item-text {
+  white-space: nowrap;
+  color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data > div .item-text a {
+  color: var(--purple-main, #6F76C0);
+  text-decoration: none;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-meta-data > div .label-text {
+  flex-grow: 1;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-price-button {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-price-button .game-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-price-button .game-price del {
+  order: 2;
+  color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  line-height: 32px;
+}
+
+.wp-block-blocks-gamestore-single-game .wrapper .game-content .game-price-button .game-price ins {
+  order: 1;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 5.1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode-gamestore .wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_xbox {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><g clip-path=\"url%28%23clip0_1513_4019%29\"><path d=\"M14.4492 12.4296C16.1797 14.5507 16.9766 16.289 16.5742 17.0664C16.2656 17.6562 14.3594 18.8085 12.957 19.25C11.8008 19.6132 10.2852 19.7695 9.03517 19.6484C7.54298 19.5039 6.03126 18.9687 4.73439 18.125C3.64454 17.414 3.39845 17.121 3.39845 16.539C3.39845 15.371 4.68361 13.3242 6.88282 10.9882C8.13282 9.66401 9.87111 8.10933 10.0625 8.15229C10.4297 8.23433 13.3555 11.0859 14.4492 12.4296ZM7.3672 5.61714C6.20704 4.56636 5.09767 3.51167 3.9922 3.14058C3.39845 2.94136 3.35548 2.95308 2.87111 3.45698C1.73048 4.64448 0.781262 6.57026 0.515637 8.23823C0.3047 9.57417 0.277356 9.94917 0.351575 10.6015C0.570325 12.5742 1.02736 13.9375 1.93361 15.3242C2.3047 15.8945 2.40626 16 2.29689 15.7109C2.13283 15.2812 2.28517 14.246 2.66798 13.2109C3.22658 11.6875 4.77345 8.80073 7.3672 5.61714ZM19.5391 8.09761C18.8789 4.97261 16.9024 3.00776 16.625 3.00776C16.3399 3.00776 15.6797 3.26167 15.2188 3.55073C14.3086 4.11714 13.6172 4.77729 12.707 5.61323C14.3633 7.69526 16.6992 11.0585 17.5078 13.5156C17.7735 14.3242 17.8867 15.121 17.7969 15.5585C17.7305 15.8906 17.7305 15.8906 17.8516 15.7382C18.0899 15.4375 18.6289 14.5156 18.8438 14.039C19.1328 13.4062 19.4297 12.4687 19.5703 11.746C19.7383 10.8671 19.7227 8.98042 19.5391 8.09761ZM5.51954 1.67964C7.38283 1.58198 9.8047 3.02729 9.98439 3.06245C10.0117 3.06636 10.3906 2.89839 10.8281 2.68354C13.3242 1.4687 14.5 1.67573 15.0235 1.69917C12.5274 0.164013 9.05861 -0.253956 5.88673 1.24214C4.97267 1.67573 4.94923 1.70698 5.51954 1.67964Z\" fill=\"%23FFFFFF\"/></g><defs><clipPath id=\"clip0_1513_4019\"><rect width=\"20\" height=\"20\" fill=\"white\"/></clipPath></defs></svg>") center center no-repeat;
+}
+
+body.dark-mode-gamestore .wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_playstation {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M1.32812 16.3555L8.32581 17.369V10.674H1.32812V16.3555ZM1.32812 9.71764H8.32581V3.02193L1.32812 4.03546V9.71764ZM9.28219 17.5077L18.6717 18.8676V10.674H9.28219V17.5077ZM9.28219 2.88293V9.71764H18.6717V1.52368L9.28219 2.88293Z\" fill=\"%23FFF\"/></svg>") center center no-repeat;
+}
+
+body.dark-mode-gamestore .wp-block-blocks-gamestore-single-game .wrapper aside.game-image .game-platforms .platform_microsoft {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"20\" viewBox=\"0 0 25 20\" fill=\"none\"><path d=\"M24.3987 15.0412C23.9171 15.6489 22.7385 16.0813 22.7385 16.0813L13.9748 19.2292V16.9075L20.4245 14.6104C21.1569 14.3488 21.2692 13.9765 20.6738 13.7826C20.0799 13.5872 19.0044 13.6441 18.2736 13.9057L13.9748 15.4197V13.0102L14.2225 12.9272C14.2225 12.9272 15.4641 12.4871 17.2104 12.2933C18.9567 12.1009 21.0953 12.3194 22.7739 12.9549C24.6664 13.5549 24.8787 14.435 24.3987 15.0412ZM14.8087 11.0901V5.15115C14.8087 4.45417 14.681 3.81258 14.0271 3.63102C13.5255 3.46947 13.2147 3.93566 13.2147 4.6311V19.5L9.20514 18.2276V0.5C10.9099 0.816949 13.3932 1.5647 14.7287 2.01551C18.1243 3.18022 19.2752 4.6311 19.2752 7.9006C19.2752 11.087 17.3089 12.2948 14.8087 11.0885V11.0901ZM1.84763 16.6675C-0.0940704 16.1166 -0.417173 14.9781 0.467514 14.3227C1.28604 13.7165 2.67692 13.261 2.67692 13.261L8.42662 11.2147V13.5457L4.28782 15.0273C3.55853 15.2889 3.44622 15.6597 4.04011 15.8551C4.63401 16.049 5.70948 15.9936 6.4403 15.732L8.42508 15.0104V17.0967L8.02966 17.1629C5.95906 17.4981 3.83809 17.3276 1.84763 16.6659V16.6675Z\" fill=\"%23FFFFFF\"/></svg>") center center no-repeat;
+}
+
+body.dark-mode-gamestore .wp-block-blocks-gamestore-single-game {
+  background: var(--wp--preset--color--base);
+}
+
+body.wp-admin .wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .game-screen {
+  display: none;
+}
+
+body.wp-admin .wp-block-blocks-gamestore-single-game .wrapper .game-content .game-single-slider .game-screen:first-child {
+  display: block;
+}
