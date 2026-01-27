@@ -15,10 +15,41 @@
  * @since 1.0.0
  *
  */
+
+add_action('after_setup_theme', function () {
+    add_theme_support('woocommerce');
+});
+
+
+// ... existing code ...
+function gutenberg_activate_on_products($can_edit, $post_type)
+{
+    if ($post_type == 'product') {
+        return true;
+    }
+    return $can_edit;
+}
+
+add_filter('use_block_editor_for_post_type', 'gutenberg_activate_on_products', 10, 2);
+
+// Включаем поддержку REST API для таксономий товаров (категории и метки),
+// чтобы они отображались в редакторе Gutenberg
+function enable_taxonomy_rest( $args ){
+    $args['show_in_rest'] = true;
+    return $args;
+}
+add_filter('woocommerce_taxonomy_args_product_cat','enable_taxonomy_rest');
+add_filter('woocommerce_taxonomy_args_product_tag','enable_taxonomy_rest');
+
+
+// фильтр удаляет заголовок «Описание» (Description), который по умолчанию отображается внутри вкладки «Описание» на странице одного товара в WooCommerce...
+add_filter('woocommerce_product_description_heading','__return_null');
+
+
 function gamestore_styles()
 {
-    wp_enqueue_style('gamestore-general',get_template_directory_uri() . '/assets/css/gamestore.css',[],wp_get_theme()->get( 'Version' ));
-    wp_enqueue_script('gamestore-theme-related', get_template_directory_uri() . '/assets/js/gamestore.js', [], wp_get_theme()->get( 'Version' ), true);
+    wp_enqueue_style('gamestore-general', get_template_directory_uri() . '/assets/css/gamestore.css', [], wp_get_theme()->get('Version'));
+    wp_enqueue_script('gamestore-theme-related', get_template_directory_uri() . '/assets/js/gamestore.js', [], wp_get_theme()->get('Version'), true);
     wp_localize_script('gamestore-theme-related', 'gamestore_params', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
     ));
@@ -27,8 +58,8 @@ function gamestore_styles()
 
 
     //Swiper Slider
-    wp_enqueue_style('swiper-bundle',get_template_directory_uri() . '/assets/css/swiper-bundle.min.css',[],wp_get_theme()->get( 'Version' ));
-    wp_enqueue_script('swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', [], wp_get_theme()->get( 'Version' ), true);
+    wp_enqueue_style('swiper-bundle', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', [], wp_get_theme()->get('Version'));
+    wp_enqueue_script('swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', [], wp_get_theme()->get('Version'), true);
 }
 
 add_action('wp_enqueue_scripts', 'gamestore_styles');
@@ -52,20 +83,24 @@ function gamestore_google_font()
     return $font_url;
 }
 
-function gamestore_google_font_script(){
-    wp_enqueue_style('gamestore-google-font',gamestore_google_font(),[],'1.0.0');
+function gamestore_google_font_script()
+{
+    wp_enqueue_style('gamestore-google-font', gamestore_google_font(), [], '1.0.0');
 }
-add_action('wp_enqueue_scripts','gamestore_google_font_script');
+
+add_action('wp_enqueue_scripts', 'gamestore_google_font_script');
 
 
 // Load assets in Gutenberg
-function gamestore_gutenberg_styles(){
-    wp_enqueue_style('gamestore-google-font',gamestore_google_font(),[],'1.0.0');
-    if(is_admin()){
-        wp_enqueue_style('gamestore-editor-style',get_template_directory_uri() . '/assets/css/editor-style.css',['gamestore-google-font'],wp_get_theme()->get( 'Version' ));
+function gamestore_gutenberg_styles()
+{
+    wp_enqueue_style('gamestore-google-font', gamestore_google_font(), [], '1.0.0');
+    if (is_admin()) {
+        wp_enqueue_style('gamestore-editor-style', get_template_directory_uri() . '/assets/css/editor-style.css', ['gamestore-google-font'], wp_get_theme()->get('Version'));
         add_editor_style('assets/css/editor-style.css');
     }
 }
+
 add_action('enqueue_block_editor_assets', 'gamestore_gutenberg_styles');
 add_action('enqueue_block_assets', 'gamestore_gutenberg_styles');
 
@@ -94,4 +129,6 @@ enqueue_block_assets
 То есть это “общие” стили/скрипты для блоков, которые должны работать везде.
 Типично туда кладут: CSS, который нужен и на сайте, и в редакторе, чтобы блоки выглядели одинаково.
 
+
+use_block_editor_for_post_type — именно он отвечает за переключение между классическим редактором и Gutenberg для конкретных типов записей.
  * */
