@@ -69,7 +69,10 @@ function view_block_recent_news($attributes)
 	if ($news_query->have_posts()) {
 
 		if (!empty($attributes['title'])) {
-			echo '<h2>' . esc_html($attributes['title']) . '</h2>';
+			// Разрешаем базовый безопасный HTML внутри заголовка (например: <span>, <strong>, <em>).
+			// esc_html экранирует теги и выводит их как текст — поэтому <span> отображался как текст.
+			// Используем wp_kses_post для безопасного разрешения HTML, или wp_kses с собственным списком разрешённых тегов.
+			echo '<h2>' . wp_kses_post($attributes['title']) . '</h2>';
 		}
 
 		if (!empty($attributes['description'])) {
@@ -448,6 +451,154 @@ function view_block_single_game()
 }
 
 
+function view_block_similar_products($attributes)
+{
+	global $post;
+
+	$link_html = ($attributes['link']) ? '<a href="' . esc_url($attributes['link']) . '" class="view-all-link">' . $attributes['linkAnchor'] . '</a>' : null;
+
+	// если у нас нет объекта $post и мы не находимся на single_product, возвращаем пустую строку
+	if (!$post || !is_singular('product')) return '';
+
+	// дальше нам нужен id текущей страницы если это продукт
+	$post_id = $post->ID;
+
+	// построим объект самого прродукта
+	$poduct = wc_get_product($post_id);
+
+	if (!$poduct) return ''; // если нет объекта продукта, возвращаем пустую строку
+
+	// Продукты similar product — тоесть похожие продукты мы будем привязывать по жанрам.
+
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 6;
+
+	// Продукты similar product — тоесть похожие продукты мы будем привязывать по жанрам и по платформам (если они есть).
+	$genres = wp_get_post_terms($post_id, 'genres', array('fields' => 'ids')); // получаем текущие термы жанров текущего продукта по таксономии 'genres'
+
+	// Получаем текущие термы платформ текущего продукта по таксономии 'platforma' (если нужно будет использовать)
+	$platforms = wp_get_post_terms($post_id, 'platforms', array('fields' => 'ids')); // нам нужны только ID терминов - 'fields' => 'ids'
+
+	// логика OR
+	/*
+		Что будет выводиться с OR - У товара есть хотя бы один жанр или платформа
+		Выводятся товары, у которых есть любой из жанров текущего товара или любая из платформ текущего товара.
+		У товара НЕТ жанров и НЕТ платформ. Тогда не с чем сравнивать.
+		Если ты всё равно передашь пустой tax_query (только relation), WooCommerce воспримет это как “без фильтра” и выведет просто любые опубликованные товары (кроме текущего). То есть “похожие” превратится в “все товары”.
+	*/
+
+	// ллогика AND
+	/*
+ 	  У товара есть и жанры, и платформы:
+      Выводятся товары, которые совпадают ХОТЯ БЫ по одному жанру из текущего товара
+      И одновременно совпадают ХОТЯ БЫ по одной платформе из текущего товара.
+      (То есть нужно пересечение по обеим таксономиям.)
+
+	   - У товара есть только жанры (платформ нет):
+      Выводятся товары, которые совпадают по жанрам.
+      (Платформы не участвуют, потому что их нет.)
+
+    - У товара есть только платформы (жанров нет):
+      Выводятся товары, которые совпадают по платформам.
+      (Жанры не участвуют, потому что их нет.)
+
+	 - У товара НЕТ жанров и НЕТ платформ:
+      Тогда не с чем сравнивать.
+      Если передать пустой tax_query (только relation), WooCommerce воспримет это как “без фильтра”
+      и выведет любые опубликованные товары (кроме текущего).
+      Поэтому в этом случае лучше НЕ выполнять запрос / не показывать блок similar.
+	 * */
+
+	$tax_query = array('relation' => 'AND'); // логика AND - оба условия должны быть выполнены
+	if (!empty($genres)) {
+		$tax_query[] = array(
+			'taxonomy' => 'genres',
+			'field' => 'term_id',
+			'terms' => $genres
+		);
+	}
+	if (!empty($platforms)) {
+		$tax_query[] = array(
+			'taxonomy' => 'platforms',
+			'field' => 'term_id',
+			'terms' => $platforms
+		);
+	}
+
+	$similar_games = wc_get_products(array(
+		'status' => 'publish',
+		'limit' => $count,
+		// текущий пост ненужно включать в результаты
+		'exclude' => array($post_id),
+		// фильтр по таксономиям (жанры и платформы)
+		'tax_query' => $tax_query,
+	));
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
+	echo '<div class="wrapper">';
+	echo '<div class="similar-top">';
+	if (!empty($attributes['title'])) {
+		echo '<h2>' . wp_kses_post($attributes['title']) . '</h2>';
+	}
+	echo '<div class="right-similar-top">';
+	echo $link_html;
+	if (count($similar_games) > 6) {
+		echo '<div class="similar-navigation"><div class="similar-left"></div><div class="similar-right"></div></div>';
+	}
+	echo '</div>';
+	echo '</div>';
+
+	$platforms = get_gamestore_platforms();
+
+	if (!empty($similar_games)) {
+
+		echo '<div class="games-list similar-games-list"><div class="swiper-wrapper">';
+
+		foreach ($similar_games as $game) {
+			if (!$game instanceof WC_Product) {
+				continue;
+			}
+
+			$platforms_html = '';
+
+			echo '<div class="game-result swiper-slide">';
+			echo '<a href="' . esc_url($game->get_permalink()) . '">';
+			echo '<div class="game-featured-image">' . $game->get_image('full') . '</div>';
+			echo '<div class="game-meta">';
+			echo '<div class="game-price">' . $game->get_price_html() . '</div>';
+			echo '<h3>' . esc_html($game->get_name()) . '</h3>';
+			echo '<div class="game-platforms">';
+
+			if (!empty($platforms) && is_array($platforms)) {
+				foreach ($platforms as $slug => $label) {
+					$has_platform = get_post_meta($game->get_id(), '_platform_' . strtolower($slug), true);
+					if ($has_platform === 'yes') {
+						$platforms_html .= '<div class="platform_' . esc_attr(strtolower($slug)) . '"></div>';
+					}
+				}
+			}
+
+			echo $platforms_html;
+
+			echo '</div>'; // .game-platforms
+			echo '</div>'; // .game-meta
+			echo '</a>';
+			echo '</div>'; // .game-result
+		}
+
+		echo '</div></div>';
+
+	} else {
+		echo '<p>No games found.</p>';
+	}
+
+	echo '</div>'; // .wrapper
+	echo '</div>'; // block wrapper
+
+	return ob_get_clean();
+}
+
 
 
 // ob_start() и ob_get_clean() — это функции для управления буфером вывода в PHP.
@@ -544,3 +695,6 @@ is_wp_error() — это функция WordPress, которая проверя
 		Но если что-то пошло не так (неверная таксономия, проблема с БД и т.п.), она может вернуть WP_Error.
 	Если не проверить и попытаться сделать foreach по WP_Error, получишь предупреждения/ошибки и кривой вывод.
  * */
+
+
+

@@ -99,6 +99,14 @@ function create_block_blocks_gamestore_block_init() {
 			'render_callback' => 'view_block_single_game',
 		]
 	);
+
+	register_block_type(
+		__DIR__ . '/build/block-similar-products',
+		[
+			'render_callback' => 'view_block_similar_products',
+		]
+	);
+
 }
 add_action( 'init', 'create_block_blocks_gamestore_block_init' );
 
