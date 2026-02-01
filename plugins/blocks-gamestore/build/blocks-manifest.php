@@ -1,6 +1,36 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'block-bestseller-products' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'blocks-gamestore/bestseller-products',
+		'version' => '0.1.0',
+		'title' => 'Bestseller Products',
+		'category' => 'gamestore',
+		'icon' => 'smiley',
+		'description' => 'Bestseller Products',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'count' => array(
+				'type' => 'number',
+				'default' => 6
+			),
+			'title' => array(
+				'type' => 'string'
+			)
+		),
+		'textdomain' => 'blocks-gamestore',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js'
+	),
 	'block-contact' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -322,6 +352,34 @@ return array(
 				'type' => 'string'
 			),
 			'description' => array(
+				'type' => 'string'
+			),
+			'image' => array(
+				'type' => 'string'
+			)
+		),
+		'textdomain' => 'blocks-gamestore',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'block-product-header' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'blocks-gamestore/product-header',
+		'version' => '0.1.0',
+		'title' => 'Shop Archive Header',
+		'category' => 'gamestore',
+		'icon' => 'smiley',
+		'description' => 'News Header Block',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'title' => array(
 				'type' => 'string'
 			),
 			'image' => array(

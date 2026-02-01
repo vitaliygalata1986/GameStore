@@ -1,0 +1,1 @@
+{"version":3,"file":"block-product-header/index.css","mappings":";;;AACC;EACC;EACA;AAAF,C","sources":["webpack://blocks-gamestore/./src/block-product-header/editor.scss"],"sourcesContent":[".components-panel__body {\n\timg {\n\t\tmax-width: 100%;\n\t\theight: auto;\n\t}\n}\n"],"names":[],"sourceRoot":""}

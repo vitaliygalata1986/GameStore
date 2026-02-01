@@ -1,0 +1,89 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-bestseller-products/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blocks-gamestore-bestseller-products {
+  margin-top: 0;
+  margin-bottom: clamp(3.75rem, 2.77rem + 4.92vw, 7.5rem) !important;
+}
+.wp-block-blocks-gamestore-bestseller-products h2 {
+  line-height: 1.4;
+  margin: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.wp-block-blocks-gamestore-bestseller-products h2 span {
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top .view-all-link {
+  border-radius: 5px;
+  background: var(--white-contrast);
+  padding: 20px 32px;
+  color: var(--black-contrast, #FFF);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top .similar-navigation {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top .similar-navigation > div {
+  background: var(--accent-gradient);
+  border-radius: 100%;
+  display: block;
+  width: 64px;
+  height: 64px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top .similar-navigation > div::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: block;
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M14.9998 19.9201L8.47984 13.4001C7.70984 12.6301 7.70984 11.3701 8.47984 10.6001L14.9998 4.08008\" stroke=\"white\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>");
+}
+.wp-block-blocks-gamestore-bestseller-products .similar-top .right-similar-top .similar-navigation .similar-right::before {
+  background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7.9025 19.9201L14.4225 13.4001C15.1925 12.6301 15.1925 11.3701 14.4225 10.6001L7.9025 4.08008\" stroke=\"white\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>");
+}
+.wp-block-blocks-gamestore-bestseller-products .bestseller-games-list {
+  overflow: hidden;
+}
+.wp-block-blocks-gamestore-bestseller-products .games-list {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.wp-block-blocks-gamestore-bestseller-products .games-list .game-result {
+  max-width: 243px;
+}
+.wp-block-blocks-gamestore-bestseller-products .games-list .game-result .game-meta h3 {
+  color: var(--text-primary, #0E0D0F);
+}
+
+/*# sourceMappingURL=style-index.css.map*/

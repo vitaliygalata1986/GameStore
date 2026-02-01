@@ -599,7 +599,130 @@ function view_block_similar_products($attributes)
 	return ob_get_clean();
 }
 
+function view_block_product_header($attributes)
+{
+	$image_bg = !empty($attributes['image'])
+		? 'style="background-image: url(' . esc_url($attributes['image']) . ');"'
+		: '';
 
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . (!empty($image_bg) ? ' ' . $image_bg : '') . '>';
+	echo '<div class="wrapper">';
+
+	if (!empty($attributes['title'])) {
+		echo '<h1 class="news-header-title">' . esc_html($attributes['title']) . '</h1>';
+	}
+
+	$terms_news = get_terms(array(
+		'taxonomy' => 'genres',
+		'hide_empty' => false,
+	));
+
+	if (!empty($terms_news) && !is_wp_error($terms_news)) {
+		echo '<div class="games-categories">';
+
+		foreach ($terms_news as $term) {
+			$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
+
+			$icon_html = $icon_meta
+				? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
+				: '';
+
+			echo '<div class="games-cat-item"><a href="' . esc_url(get_term_link($term)) . '">'
+				. esc_html($term->name)
+				. $icon_html
+				. '</a></div>';
+		}
+
+		echo '</div>';
+	}
+
+	echo '</div>';
+	echo '</div>';
+
+	return ob_get_clean();
+}
+
+function view_block_bestseller_products($attributes)
+{
+	// мы на архивной странице продуктов
+
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 6;
+
+	// нам нужны самые продаваемые продукты
+	$bestseller_games = wc_get_products(array(
+		'status' => 'publish',
+		'limit' => $count,
+		'meta_key' => 'total_sales', // самые продаваемые товары по количеству продаж в WooCommerce
+		'orderby' => 'meta_value_num',
+		'order' => 'DESC',
+	));
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
+	echo '<div class="wrapper">';
+	echo '<div class="similar-top">';
+	if (!empty($attributes['title'])) {
+		echo '<h2>' . wp_kses_post($attributes['title']) . '</h2>';
+	}
+	echo '<div class="right-similar-top">';
+	if (count($bestseller_games) > 6) {
+		echo '<div class="similar-navigation"><div class="similar-left"></div><div class="similar-right"></div></div>';
+	}
+	echo '</div>';
+	echo '</div>';
+
+	$platforms = get_gamestore_platforms();
+
+	if (!empty($bestseller_games)) {
+
+		echo '<div class="games-list bestseller-games-list"><div class="swiper-wrapper">';
+
+		foreach ($bestseller_games as $game) {
+			if (!$game instanceof WC_Product) {
+				continue;
+			}
+
+			$platforms_html = '';
+
+			echo '<div class="game-result swiper-slide">';
+			echo '<a href="' . esc_url($game->get_permalink()) . '">';
+			echo '<div class="game-featured-image">' . $game->get_image('full') . '</div>';
+			echo '<div class="game-meta">';
+			echo '<div class="game-price">' . $game->get_price_html() . '</div>';
+			echo '<h3>' . esc_html($game->get_name()) . '</h3>';
+			echo '<div class="game-platforms">';
+
+			if (!empty($platforms) && is_array($platforms)) {
+				foreach ($platforms as $slug => $label) {
+					$has_platform = get_post_meta($game->get_id(), '_platform_' . strtolower($slug), true);
+					if ($has_platform === 'yes') {
+						$platforms_html .= '<div class="platform_' . esc_attr(strtolower($slug)) . '"></div>';
+					}
+				}
+			}
+
+			echo $platforms_html;
+
+			echo '</div>'; // .game-platforms
+			echo '</div>'; // .game-meta
+			echo '</a>';
+			echo '</div>'; // .game-result
+		}
+
+		echo '</div></div>';
+
+	} else {
+		echo '<p>No games found.</p>';
+	}
+
+	echo '</div>'; // .wrapper
+	echo '</div>'; // block wrapper
+
+	return ob_get_clean();
+}
 
 // ob_start() и ob_get_clean() — это функции для управления буфером вывода в PHP.
 /*

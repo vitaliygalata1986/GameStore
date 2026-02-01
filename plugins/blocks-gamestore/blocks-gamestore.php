@@ -107,6 +107,20 @@ function create_block_blocks_gamestore_block_init() {
 		]
 	);
 
+	register_block_type(
+		__DIR__ . '/build/block-product-header',
+		[
+			'render_callback' => 'view_block_product_header',
+		]
+	);
+
+	register_block_type(
+		__DIR__ . '/build/block-bestseller-products',
+		[
+			'render_callback' => 'view_block_bestseller_products',
+		]
+	);
+
 }
 add_action( 'init', 'create_block_blocks_gamestore_block_init' );
 
