@@ -724,6 +724,154 @@ function view_block_bestseller_products($attributes)
 	return ob_get_clean();
 }
 
+function view_block_games_box($attributes)
+{
+	$count = isset($attributes['count']) ? absint($attributes['count']) : 8;
+	$title = !empty($attributes['title']) ? wp_kses_post($attributes['title']) : '';
+
+	$language_terms = get_terms(array('taxonomy' => 'languages', 'hide_empty' => false));
+	$genre_terms = get_terms(array('taxonomy' => 'genres', 'hide_empty' => false));
+	$platform_terms = get_terms(array('taxonomy' => 'platforms', 'hide_empty' => false));
+	$years = range(date('Y'), date('Y') - 20); // последние 20 лет
+	$publishers = array('Ubisoft', 'Rockstar Games');
+	$singleplayer = array('Yes', 'No');
+
+	$games_posts = wc_get_products(array(
+		'status' => 'publish',
+		'limit' => $count,
+	));
+
+	ob_start();
+
+	echo '<div ' . get_block_wrapper_attributes() . '>';
+	echo '<div class="wrapper">';
+
+	if ($title) {
+		echo '<div class="filter-title-top"><h2 class="games-box-title">' . $title . '</h2>';
+		echo '<div class="custom-sort"><span class="label">' . esc_html__('Sort by:', 'blocks-gamestore') . '</span>';
+		echo '<form method="get" class="gamestore-sorting-form"><select name="sorting" id="gamestore-sorting">';
+		echo '<option value="">' . esc_html__('Default Sorting', 'blocks-gamestore') . '</option>';
+		echo '<option value="latest">' . esc_html__('Sort by Latest', 'blocks-gamestore') . '</option>';
+		echo '<option value="price_low_high">' . esc_html__('Sort by Price (low to high)', 'blocks-gamestore') . '</option>';
+		echo '<option value="price_high_low">' . esc_html__('Sort by Price (high to low)', 'blocks-gamestore') . '</option>';
+		echo '<option value="popularity">' . esc_html__('Sort by Popularity', 'blocks-gamestore') . '</option>';
+		echo '</select></form>';
+		echo '</div></div>';
+	}
+
+	echo '<div class="games-box-filter">';
+	echo '<div class="games-filter">';
+	echo '<form method="get" action="" class="gamestore-filter-form">';
+	// wp_nonce_field('gamestore_filter_action', 'gamestore_filter_nonce');
+
+	if (!empty($language_terms) && !is_wp_error($language_terms)) {
+		echo '<div class="games-filter-item"><h5>' . esc_html__('Languages', 'blocks-gamestore') . '</h5>';
+		foreach ($language_terms as $language) {
+			$tid = (int)$language->term_id;
+			$name = esc_html($language->name);
+			echo '<div class="filter-item"><label for="language-' . esc_attr($tid) . '"><input type="checkbox" id="language-' . esc_attr($tid) . '" name="language-' . $language->term_id . '" value="' . esc_attr($tid) . '">' . $name . '</label></div>';
+
+		}
+		echo '</div>';
+	}
+
+	if (!empty($genre_terms) && !is_wp_error($genre_terms)) {
+		echo '<div class="games-filter-item"><h5>' . esc_html__('Genres', 'blocks-gamestore') . '</h5>';
+		foreach ($genre_terms as $genre) {
+			$tid = (int)$genre->term_id;
+			$name = esc_html($genre->name);
+			echo '<div class="filter-item"><label for="genre-' . esc_attr($tid) . '"><input type="checkbox" id="genre-' . esc_attr($tid) . '" name="genre-' . $genre->term_id . '" value="' . esc_attr($tid) . '">' . $name . '</label></div>';
+		}
+		echo '</div>';
+	}
+
+	if (!empty($platform_terms) && !is_wp_error($platform_terms)) {
+		echo '<div class="games-filter-item"><select name="platforms" id="platforms">';
+		echo '<option value="">' . esc_html__('Platform', 'blocks-gamestore') . '</option>';
+		foreach ($platform_terms as $plat) {
+			echo '<option value="' . esc_attr($plat->term_id) . '">' . esc_html($plat->name) . '</option>';
+		}
+		echo '</select></div>';
+	}
+
+	echo '<div class="games-filter-item"><select name="singleplayer" id="singleplayer">';
+	echo '<option value="">' . esc_html__('Single player', 'blocks-gamestore') . '</option>';
+	foreach ($singleplayer as $player) {
+		echo '<option value="' . esc_attr($player) . '">' . esc_html($player) . '</option>';
+	}
+	echo '</select></div>';
+
+	echo '<div class="games-filter-item"><select name="publisher" id="publisher">';
+	echo '<option value="">' . esc_html__('Publisher', 'blocks-gamestore') . '</option>';
+	foreach ($publishers as $publisher) {
+		echo '<option value="' . esc_attr($publisher) . '">' . esc_html($publisher) . '</option>';
+	}
+	echo '</select></div>';
+
+	echo '<div class="games-filter-item"><select name="released" id="released">';
+	echo '<option value="">' . esc_html__('Released', 'blocks-gamestore') . '</option>';
+	foreach ($years as $year) {
+		echo '<option value="' . esc_attr($year) . '">' . esc_html($year) . '</option>';
+	}
+	echo '</select></div>';
+
+	echo '<div class="games-filter-item-select">';
+	echo '<button type="reset" class="hero-button shadow">' . esc_html__('Reset Filter', 'blocks-gamestore') . '</button>';
+	echo '</div>';
+
+	echo '<input type="hidden" name="posts_per_page" value="' . esc_attr($count) . '" />';
+	echo '</form>';
+	echo '</div>'; // .games-filter
+
+	echo '<div class="games-box-list">';
+
+	if (!empty($games_posts)) {
+		echo '<div class="games-list">';
+		$platforms_map = function_exists('get_gamestore_platforms') ? get_gamestore_platforms() : array();
+		foreach ($games_posts as $game) {
+			if (!$game instanceof WC_Product) {
+				continue;
+			}
+
+			echo '<div class="game-result">';
+			echo '<a href="' . esc_url($game->get_permalink()) . '">';
+			echo '<div class="game-featured-image">' . wp_kses_post($game->get_image('full')) . '</div>';
+			echo '<div class="game-meta">';
+			echo '<div class="game-price">' . wp_kses_post($game->get_price_html()) . '</div>';
+			echo '<h3>' . esc_html($game->get_name()) . '</h3>';
+			echo '<div class="game-platforms">';
+			if (!empty($platforms_map) && is_array($platforms_map)) {
+				foreach ($platforms_map as $slug => $label) {
+					if (get_post_meta($game->get_id(), '_platform_' . strtolower($slug), true) === 'yes') {
+						echo '<div class="platform_' . esc_attr(strtolower($slug)) . '"></div>';
+					}
+				}
+			}
+			echo '</div>'; // .game-platforms
+			echo '</div>'; // .game-meta
+			echo '</a>';
+			echo '</div>'; // .game-result
+		}
+		echo '</div>'; // .games-list
+
+		echo '<div class="load-more-container">';
+		echo '<div class="load-more-container"><a class="load-more-button hero-button shadow">' . esc_html__('Load More', 'blocks-gamestore') . '</a></div>';
+
+		echo '</div>';
+	} else {
+		echo '<p>' . esc_html__('No games found.', 'blocks-gamestore') . '</p>';
+	}
+
+	echo '</div>'; // .games-box-list
+	echo '</div>'; // .games-box-filter
+
+	echo '</div>'; // .wrapper
+	echo '</div>'; // block wrapper
+
+	return ob_get_clean();
+}
+
+
 // ob_start() и ob_get_clean() — это функции для управления буфером вывода в PHP.
 /*
  * ob_start(); говорит PHP: «Не отправляй вывод (echo, print и т.д.) сразу в браузер. Вместо этого складывай всё в буфер (память).»

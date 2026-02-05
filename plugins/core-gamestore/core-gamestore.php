@@ -9,6 +9,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: core-gamestore
  * Domain Path: /languages
+ * Requires Plugins:   woocommerce
  */
 
  define('GAMESTORE_PLUGIN_URL', plugin_dir_url(__FILE__));   // http://localhost:8200/wp-content/plugins/core-gamestore/
@@ -19,3 +20,4 @@ require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-meta.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/social-share.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/new-term-meta.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-tax.php');
+require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-filter.php');

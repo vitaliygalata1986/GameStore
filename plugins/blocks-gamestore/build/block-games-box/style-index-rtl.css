@@ -1,0 +1,133 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block-games-box/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blocks-gamestore-games-box .filter-title-top {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wp-block-blocks-gamestore-games-box .filter-title-top h2 span {
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.wp-block-blocks-gamestore-games-box .filter-title-top .custom-sort {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.wp-block-blocks-gamestore-games-box .filter-title-top .custom-sort span.label {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+}
+.wp-block-blocks-gamestore-games-box select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 5px;
+  border: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+  background: var(--secondary-4, rgba(14, 13, 15, 0.04));
+  color: var(--text-primary, #0E0D0F);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  min-height: 60px;
+  padding: 0 24px;
+  background-image: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M8.46973 10.74L11.9997 14.26L15.5297 10.74\" stroke=\"%230E0D0F\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>");
+  background-position: 5% center;
+  background-repeat: no-repeat;
+}
+.wp-block-blocks-gamestore-games-box .game-result .game-featured-image {
+  height: 400px;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter {
+  display: flex;
+  gap: 48px;
+  align-items: start;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-box-list {
+  flex: 1;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter {
+  width: 400px;
+  border-radius: 16px;
+  background: var(--blue-4, rgba(61, 175, 226, 0.04));
+  padding: 47px;
+  box-sizing: border-box;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item-select select, .wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item-select button {
+  width: 100%;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--divider-main);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item h5 {
+  color: var(--text-primary, #0E0D0F);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item .filter-item label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  color: var(--text-primary, #0E0D0F);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item .filter-item input[type=checkbox] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  background-image: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M12.5003 18.9583H7.50033C2.97533 18.9583 1.04199 17.025 1.04199 12.5V7.49996C1.04199 2.97496 2.97533 1.04163 7.50033 1.04163H12.5003C17.0253 1.04163 18.9587 2.97496 18.9587 7.49996V12.5C18.9587 17.025 17.0253 18.9583 12.5003 18.9583ZM7.50033 2.29163C3.65866 2.29163 2.29199 3.65829 2.29199 7.49996V12.5C2.29199 16.3416 3.65866 17.7083 7.50033 17.7083H12.5003C16.342 17.7083 17.7087 16.3416 17.7087 12.5V7.49996C17.7087 3.65829 16.342 2.29163 12.5003 2.29163H7.50033Z\" fill=\"%230E0D0F\" fill-opacity=\"0.64\"/></svg>");
+  background-size: contain;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item .filter-item input[type=checkbox]:checked {
+  background-image: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M13.492 1.66663H6.50866C3.47533 1.66663 1.66699 3.47496 1.66699 6.50829V13.4833C1.66699 16.525 3.47533 18.3333 6.50866 18.3333H13.4837C16.517 18.3333 18.3253 16.525 18.3253 13.4916V6.50829C18.3337 3.47496 16.5253 1.66663 13.492 1.66663ZM13.9837 8.08329L9.25866 12.8083C9.14199 12.925 8.98366 12.9916 8.81699 12.9916C8.65033 12.9916 8.49199 12.925 8.37533 12.8083L6.01699 10.45C5.77533 10.2083 5.77533 9.80829 6.01699 9.56663C6.25866 9.32496 6.65866 9.32496 6.90033 9.56663L8.81699 11.4833L13.1003 7.19996C13.342 6.95829 13.742 6.95829 13.9837 7.19996C14.2253 7.44163 14.2253 7.83329 13.9837 8.08329Z\" fill=\"%236F76C0\"/></svg>");
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-box-list .load-more-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-box-list .load-more-container a {
+  min-width: 300px;
+}
+.wp-block-blocks-gamestore-games-box .games-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.wp-block-blocks-gamestore-games-box .games-list .game-result {
+  width: calc(25% - 12px);
+}
+.wp-block-blocks-gamestore-games-box .games-list .game-result .game-meta h3 {
+  color: var(--text-primary, #0E0D0F);
+}
