@@ -1,0 +1,12 @@
+.wp-block-blocks-gamestore-bestseller-products{
+	.bestseller-games-list{
+		.swiper-wrapper{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 16px;
+			.game-result{
+				width: calc(20% - 16px);
+			}
+		}
+	}
+}

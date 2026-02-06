@@ -78,6 +78,11 @@
 					}
 				}
 
+				.games-filter-item.games-filter-item__terms{
+					border-bottom: unset;
+					padding-bottom: 8px;
+				}
+
 				.games-filter-item {
 					padding-bottom: 16px;
 					border-bottom: 1px solid var(--divider-main);
@@ -96,7 +101,6 @@
 					}
 
 					.filter-item {
-
 
 						label {
 							display: flex;

@@ -3,10 +3,19 @@
   !*** ./src/block-games-box/view.js ***!
   \*************************************/
 document.addEventListener('DOMContentLoaded', function () {
-  const filterForm = document.querySelector('form.gamestore-filter-form');
-  if (!filterForm) return;
+  const filterForm = document.querySelector('.gamestore-filter-form');
+  const sortingForm = document.querySelector('.gamestore-sorting-form');
   const loadMoreButton = document.querySelector('.load-more-button');
   let currentPage = 1;
+  if (!filterForm && !sortingForm) return;
+  filterForm.addEventListener('change', function () {
+    currentPage = 1;
+    submitForm(false);
+  });
+  sortingForm.addEventListener('change', function () {
+    currentPage = 1;
+    submitForm(false);
+  });
   filterForm.addEventListener('change', function () {
     currentPage = 1;
     submitForm(false);
@@ -25,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function submitForm(append = false) {
     const formData = new FormData(filterForm);
+    const formSortingData = new FormData(sortingForm);
     const selectedLanguages = [];
     filterForm.querySelectorAll('input[name^="language-"]:checked').forEach(checkbox => {
       selectedLanguages.push(checkbox.name.replace('language-', ''));
@@ -51,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
         singleplayer: formData.get('singleplayer') || '',
         released: releasedYear,
         languages: selectedLanguages.join(','),
-        genres: selectedGenres.join(',')
+        genres: selectedGenres.join(','),
+        sort: formSortingData.get('sorting') // sorting - это name селекта в форме сортировки, который может быть 'latest', 'price_low_high', 'price_high_low', 'popularity'
       })
     }).then(response => response.text()).then(data => {
       const gamesListContainer = document.querySelector('.games-list');

@@ -12,6 +12,7 @@ function filter_games_ajax_handler()
     $languages_ids = !empty($_POST['languages']) ? wp_parse_id_list($_POST['languages']) : [];
     $platform_id = !empty($_POST['platforms']) ? absint($_POST['platforms']) : 0;
     $released = isset($_POST['released']) ? sanitize_text_field($_POST['released']) : '';
+    $sort = isset($_POST['sort']) ? sanitize_text_field($_POST['sort']) : '';
 
     $publisher = !empty($_POST['publisher'])
         ? trim(sanitize_text_field(wp_unslash($_POST['publisher'])))
@@ -78,6 +79,31 @@ function filter_games_ajax_handler()
             'compare' => 'BETWEEN',
             'type' => 'DATE',
         );
+    }
+
+    switch ($sort) {
+        case 'latest':
+            $args['orderby'] = 'date';
+            $args['order'] = 'DESC';
+            break;
+        case 'price_low_high':
+            $args['meta_key'] = '_price';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'ASC';
+            break;
+        case 'price_high_low':
+            $args['meta_key'] = '_price';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+            break;
+        case 'popularity':
+            $args['meta_key'] = 'total_sales';
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = 'DESC';
+            break;
+        default:
+            $args['orderby'] = 'date';
+            $args['order'] = 'DESC';
     }
 
 
@@ -220,5 +246,10 @@ if ($released) {
 
 'type' => 'DATE' нужно как раз, чтобы сравнение шло как дата, а не как простая строка.
 
+ * */
+
+
+/*
+    _price - WooCommerce хранит цену товара в таблице wp_postmeta (или префикс_ postmeta) под meta_key = '_price'. Это поле содержит текущую (активную) цену товара.
  * */
 

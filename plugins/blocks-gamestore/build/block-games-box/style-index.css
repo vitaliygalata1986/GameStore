@@ -70,6 +70,10 @@
 .wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item-select select, .wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item-select button {
   width: 100%;
 }
+.wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item.games-filter-item__terms {
+  border-bottom: unset;
+  padding-bottom: 8px;
+}
 .wp-block-blocks-gamestore-games-box .games-box-filter .games-filter form .games-filter-item {
   padding-bottom: 16px;
   border-bottom: 1px solid var(--divider-main);

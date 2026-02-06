@@ -2,6 +2,7 @@ import {__} from '@wordpress/i18n';
 import {useBlockProps, InspectorControls, MediaPlaceholder} from '@wordpress/block-editor';
 import {PanelBody, TextControl, TextareaControl} from '@wordpress/components';
 import './editor.scss';
+import placeholder from './img/default.png';
 
 export default function Edit({attributes, setAttributes}) {
 	const {count, title} = attributes;
@@ -22,7 +23,7 @@ export default function Edit({attributes, setAttributes}) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
-				Gamestore Games Filter
+				<img src={placeholder} alt="Alt"/>
 			</div>
 		</>
 	);

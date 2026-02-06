@@ -786,7 +786,7 @@ function view_block_games_box($attributes)
 	}
 
 	if (!empty($platform_terms) && !is_wp_error($platform_terms)) {
-		echo '<div class="games-filter-item"><select name="platforms" id="platforms">';
+		echo '<div class="games-filter-item games-filter-item__terms"><select name="platforms" id="platforms">';
 		echo '<option value="">' . esc_html__('Platform', 'blocks-gamestore') . '</option>';
 		foreach ($platform_terms as $plat) {
 			echo '<option value="' . esc_attr($plat->term_id) . '">' . esc_html($plat->name) . '</option>';
@@ -794,21 +794,21 @@ function view_block_games_box($attributes)
 		echo '</select></div>';
 	}
 
-	echo '<div class="games-filter-item"><select name="singleplayer" id="singleplayer">';
+	echo '<div class="games-filter-item games-filter-item__terms"><select name="singleplayer" id="singleplayer">';
 	echo '<option value="">' . esc_html__('Single player', 'blocks-gamestore') . '</option>';
 	foreach ($singleplayer as $player) {
 		echo '<option value="' . esc_attr($player) . '">' . esc_html($player) . '</option>';
 	}
 	echo '</select></div>';
 
-	echo '<div class="games-filter-item"><select name="publisher" id="publisher">';
+	echo '<div class="games-filter-item games-filter-item__terms"><select name="publisher" id="publisher">';
 	echo '<option value="">' . esc_html__('Publisher', 'blocks-gamestore') . '</option>';
 	foreach ($publishers as $publisher) {
 		echo '<option value="' . esc_attr($publisher) . '">' . esc_html($publisher) . '</option>';
 	}
 	echo '</select></div>';
 
-	echo '<div class="games-filter-item"><select name="released" id="released">';
+	echo '<div class="games-filter-item games-filter-item__terms"><select name="released" id="released">';
 	echo '<option value="">' . esc_html__('Released', 'blocks-gamestore') . '</option>';
 	foreach ($years as $year) {
 		echo '<option value="' . esc_attr($year) . '">' . esc_html($year) . '</option>';
