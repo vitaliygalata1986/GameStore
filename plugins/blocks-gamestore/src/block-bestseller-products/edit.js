@@ -1,11 +1,11 @@
 import {__} from '@wordpress/i18n';
 import {useBlockProps, InspectorControls} from '@wordpress/block-editor';
-import {PanelBody, TextControl} from '@wordpress/components';
+import {PanelBody, TextControl, SelectControl} from '@wordpress/components';
 import './editor.scss';
 import ServerSideRender from '@wordpress/server-side-render';
 
 export default function Edit({attributes, setAttributes}) {
-	const {count, title} = attributes;
+	const {count, title, productType} = attributes;
 	return (
 		<>
 			<InspectorControls>
@@ -20,6 +20,16 @@ export default function Edit({attributes, setAttributes}) {
 						label={__('Title', 'blocks-gamestore')}
 						value={title}
 						onChange={(title) => setAttributes({title})}
+					/>
+
+					<SelectControl
+						label={__('Select Type', 'blocks-gamestore')}
+						value={productType}
+						onChange={(productType) => setAttributes({productType})}
+						options={[
+							{label:'Bestseller', value: 'bestseller'},
+							{label:'Cross-Seller', value: 'crosseller'},
+						]}
 					/>
 
 				</PanelBody>

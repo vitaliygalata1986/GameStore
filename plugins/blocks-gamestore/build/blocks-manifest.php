@@ -6,7 +6,7 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'blocks-gamestore/bestseller-products',
 		'version' => '0.1.0',
-		'title' => 'Bestseller Products',
+		'title' => 'Games Slider (Best and Cross Saller)',
 		'category' => 'gamestore',
 		'icon' => 'smiley',
 		'description' => 'Bestseller Products',
@@ -22,6 +22,9 @@ return array(
 				'default' => 6
 			),
 			'title' => array(
+				'type' => 'string'
+			),
+			'productType' => array(
 				'type' => 'string'
 			)
 		),
@@ -414,6 +417,16 @@ return array(
 			),
 			'image' => array(
 				'type' => 'string'
+			),
+			'styleType' => array(
+				'type' => 'string',
+				'default' => 'archive'
+			),
+			'links' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
 			)
 		),
 		'textdomain' => 'blocks-gamestore',

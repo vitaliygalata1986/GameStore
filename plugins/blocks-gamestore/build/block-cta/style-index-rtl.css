@@ -44,6 +44,12 @@
 .wp-block-blocks-gamestore-block-cta .cta-inner .left-part .cta-title {
   margin: 0;
 }
+.wp-block-blocks-gamestore-block-cta .cta-inner .left-part .cta-title span {
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .wp-block-blocks-gamestore-block-cta .cta-inner .left-part .cta-description {
   margin: 0;
   color: var(--text-secondary, rgba(14, 13, 15, 0.7));

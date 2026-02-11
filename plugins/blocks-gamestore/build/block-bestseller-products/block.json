@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "blocks-gamestore/bestseller-products",
   "version": "0.1.0",
-  "title": "Bestseller Products",
+  "title": "Games Slider (Best and Cross Saller)",
   "category": "gamestore",
   "icon": "smiley",
   "description": "Bestseller Products",
@@ -17,6 +17,9 @@
       "default": 6
     },
     "title": {
+      "type": "string"
+    },
+    "productType": {
       "type": "string"
     }
   },

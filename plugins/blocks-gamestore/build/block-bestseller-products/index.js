@@ -8,7 +8,7 @@
   \**************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocks-gamestore/bestseller-products","version":"0.1.0","title":"Bestseller Products","category":"gamestore","icon":"smiley","description":"Bestseller Products","example":{},"supports":{"html":false},"attributes":{"count":{"type":"number","default":6},"title":{"type":"string"}},"textdomain":"blocks-gamestore","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocks-gamestore/bestseller-products","version":"0.1.0","title":"Games Slider (Best and Cross Saller)","category":"gamestore","icon":"smiley","description":"Bestseller Products","example":{},"supports":{"html":false},"attributes":{"count":{"type":"number","default":6},"title":{"type":"string"},"productType":{"type":"string"}},"textdomain":"blocks-gamestore","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }),
 
@@ -45,7 +45,8 @@ function Edit({
 }) {
   const {
     count,
-    title
+    title,
+    productType
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -63,6 +64,19 @@ function Edit({
           onChange: title => setAttributes({
             title
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Type', 'blocks-gamestore'),
+          value: productType,
+          onChange: productType => setAttributes({
+            productType
+          }),
+          options: [{
+            label: 'Bestseller',
+            value: 'bestseller'
+          }, {
+            label: 'Cross-Seller',
+            value: 'crosseller'
+          }]
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {

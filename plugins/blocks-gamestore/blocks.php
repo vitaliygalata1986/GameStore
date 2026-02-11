@@ -450,7 +450,6 @@ function view_block_single_game()
 	return ob_get_clean();
 }
 
-
 function view_block_similar_products($attributes)
 {
 	global $post;
@@ -613,30 +612,41 @@ function view_block_product_header($attributes)
 	if (!empty($attributes['title'])) {
 		echo '<h1 class="news-header-title">' . esc_html($attributes['title']) . '</h1>';
 	}
+	// будем показывать когда мы на архивной странице
+	if ($attributes['styleType'] === 'archive') {
+		$terms_news = get_terms(array(
+			'taxonomy' => 'genres',
+			'hide_empty' => false,
+		));
 
-	$terms_news = get_terms(array(
-		'taxonomy' => 'genres',
-		'hide_empty' => false,
-	));
+		if (!empty($terms_news) && !is_wp_error($terms_news)) {
+			echo '<div class="games-categories">';
 
-	if (!empty($terms_news) && !is_wp_error($terms_news)) {
-		echo '<div class="games-categories">';
+			foreach ($terms_news as $term) {
+				$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
 
-		foreach ($terms_news as $term) {
-			$icon_meta = get_term_meta($term->term_id, 'news_category_icon', true);
+				$icon_html = $icon_meta
+					? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
+					: '';
 
-			$icon_html = $icon_meta
-				? '<img src="' . esc_url($icon_meta) . '" alt="' . esc_attr($term->name) . '" />'
-				: '';
+				echo '<div class="games-cat-item"><a href="' . esc_url(get_term_link($term)) . '">'
+					. esc_html($term->name)
+					. $icon_html
+					. '</a></div>';
+			}
 
-			echo '<div class="games-cat-item"><a href="' . esc_url(get_term_link($term)) . '">'
-				. esc_html($term->name)
-				. $icon_html
-				. '</a></div>';
+			echo '</div>';
 		}
-
-		echo '</div>';
+	} else {
+		if (!empty($attributes['links'])) {
+			echo '<div class="cart-link">';
+			foreach ($attributes['links'] as $link) {
+				echo '<div class="cart-link-item"><a href="' . esc_url($link['url']) . '">' . esc_html($link['anchor']) . '</a></div>';
+			}
+			echo '</div>';
+		}
 	}
+
 
 	echo '</div>';
 	echo '</div>';
@@ -647,40 +657,73 @@ function view_block_product_header($attributes)
 function view_block_bestseller_products($attributes)
 {
 	// мы на архивной странице продуктов
-
 	$count = isset($attributes['count']) ? absint($attributes['count']) : 6;
+	if ($attributes['productType'] == 'crosseller') {
+		$cross_sell_ids = [];
+		$cart = WC()->cart->get_cart(); // получаем содержимое корзины
+		if (!empty($cart)) {
+			foreach ($cart as $cart_item) { // проходим по каждому товару в корзине
+				$product_id = $cart_item['product_id'];    // сначала получим id продукта в корзине
+				$product_cross_sell = get_post_meta($product_id, '_crosssell_ids', true); // получим массив cross-sell id для этого продукта
+				if (!empty($product_cross_sell) && is_array($product_cross_sell)) {
+					$cross_sell_ids = array_merge($cross_sell_ids, $product_cross_sell); // объединяем все cross-sell id в один массив
+				}
+			}
+		}
 
-	// нам нужны самые продаваемые продукты
-	$bestseller_games = wc_get_products(array(
-		'status' => 'publish',
-		'limit' => $count,
-		'meta_key' => 'total_sales', // самые продаваемые товары по количеству продаж в WooCommerce
-		'orderby' => 'meta_value_num',
-		'order' => 'DESC',
-	));
+		// уберем дубликаты из массива cross-sell id (так как один и тот же cross-sell может быть у нескольких продуктов в корзине)
+		$cross_sell_ids = array_unique($cross_sell_ids);
+		// print_r($cross_sell_ids); // Array ( [0] => 264 [1] => 269 [2] => 267 )
+
+
+		if (!empty($cross_sell_ids)) { // не показываем блок, если в корзине нет товаров или у товаров нет cross-sell продуктов
+			$slider_games = wc_get_products(array(
+				'status' => 'publish',
+				'limit' => $count,
+				'include' => $cross_sell_ids,
+			));
+		} else {
+			$slider_games = [];
+		}
+	} else {
+		// нам нужны самые продаваемые продукты - bestseller - по количеству продаж. В WooCommerce это мета поле 'total_sales' (количество продаж для каждого продукта хранится в мета поле 'total_sales')
+		$slider_games = wc_get_products(array(
+			'status' => 'publish',
+			'limit' => $count,
+			'meta_key' => 'total_sales', // самые продаваемые товары по количеству продаж в WooCommerce
+			'orderby' => 'meta_value_num',
+			'order' => 'DESC',
+		));
+
+	}
+
 
 	ob_start();
 
-	echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
-	echo '<div class="wrapper">';
-	echo '<div class="similar-top">';
-	if (!empty($attributes['title'])) {
-		echo '<h2>' . wp_kses_post($attributes['title']) . '</h2>';
-	}
-	echo '<div class="right-similar-top">';
-	if (count($bestseller_games) > 6) {
-		echo '<div class="similar-navigation"><div class="similar-left"></div><div class="similar-right"></div></div>';
-	}
-	echo '</div>';
-	echo '</div>';
 
-	$platforms = get_gamestore_platforms();
+	if (!empty($slider_games)) {
 
-	if (!empty($bestseller_games)) {
+
+		echo '<div ' . get_block_wrapper_attributes(array('class' => 'alignfull')) . '>';
+		echo '<div class="wrapper">';
+
+		echo '<div class="similar-top">';
+		if (!empty($attributes['title'])) {
+			echo '<h2>' . wp_kses_post($attributes['title']) . '</h2>';
+		}
+		echo '<div class="right-similar-top">';
+		if (count($slider_games) > 6) {
+			echo '<div class="similar-navigation"><div class="similar-left"></div><div class="similar-right"></div></div>';
+		}
+		echo '</div>';
+		echo '</div>';
+
+
+		$platforms = get_gamestore_platforms();
 
 		echo '<div class="games-list bestseller-games-list"><div class="swiper-wrapper">';
 
-		foreach ($bestseller_games as $game) {
+		foreach ($slider_games as $game) {
 			if (!$game instanceof WC_Product) {
 				continue;
 			}
@@ -713,14 +756,10 @@ function view_block_bestseller_products($attributes)
 		}
 
 		echo '</div></div>';
+		echo '</div>'; // .wrapper
+		echo '</div>'; // block wrapper
 
-	} else {
-		echo '<p>No games found.</p>';
 	}
-
-	echo '</div>'; // .wrapper
-	echo '</div>'; // block wrapper
-
 	return ob_get_clean();
 }
 

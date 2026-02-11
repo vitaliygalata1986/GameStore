@@ -1,0 +1,246 @@
+body.woocommerce-cart{
+    .gamestore-cart-page {
+        width: 100%;
+        max-width: 1540px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: clamp(3.75rem, calc(2.77rem + 4.92vw), 7.5rem);
+    }
+    .gamestore-cart-page .entry-content {
+        width: 100%;
+    }
+    .gamestore-cart-page .wc-block-components-sidebar-layout {
+        gap: 24px;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .gamestore-cart-page .entry-content .wc-block-components-main {
+        padding-right: 24px;
+        width: calc(100% - 495px - 24px);
+    }
+    .gamestore-cart-page .entry-content .wc-block-components-sidebar,
+    .gamestore-cart-page .wp-block-woocommerce-checkout-totals-block {
+        margin: 0;
+        width: 495px;
+        padding-left: 24px;
+    }
+    .gamestore-cart-page .wp-block-woocommerce-checkout-order-summary-block {
+        border:0;
+    }
+    .gamestore-cart-page .is-large.wc-block-cart .wc-block-cart-items td {
+        border:0;
+        padding: 0;
+        padding-bottom: 24px;
+    }
+    .gamestore-cart-page .wc-block-cart-item__image a {
+        width: 243px;
+        height: 340px;
+        display: block;
+    }
+    .gamestore-cart-page .wc-block-cart-item__image img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+    }
+    .gamestore-cart-page .wc-block-cart-item__wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-left: 24px;
+        align-items: flex-start;
+    }
+    .gamestore-cart-page .wc-block-cart-item__quantity {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+    }
+    .gamestore-cart-page .wc-block-components-product-price {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+    }
+    .gamestore-cart-page .wc-block-components-product-price__value.is-discounted {
+        margin-left: 0;
+    }
+    .gamestore-cart-page table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantity button.wc-block-cart-item__remove-link {
+        border-radius: 5px;
+        background: var(--white-contrast, #0E0D0F);
+        color: var(--black-contrast, #FFF);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%;
+        letter-spacing: 2.1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 8px 24px;
+        min-height: 48px;
+        box-sizing: border-box;
+    }
+    .gamestore-cart-page .wc-block-components-product-price__regular{
+        color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 2.1px;
+        text-transform: uppercase;
+        line-height: 32px;
+        text-decoration: line-through;
+        order:2;
+    }
+    .gamestore-cart-page  .wc-block-cart__submit-button{
+        border: 0;
+        outline: 0;
+        border-radius: 5px;
+        display: inline-flex;
+        padding: 20px 32px;
+        font-family: "Ubuntu", sans-serif;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 2.1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #FFF;
+        background: var(--accent-gradient, linear-gradient(90deg, #3DAFE2 0%, #6F76C0 100%));
+        transition: all 300ms ease-in-out;
+        cursor: pointer;
+        box-shadow: 0px 16px 24px 0px rgba(61, 175, 226, 0.48);
+    }
+    .gamestore-cart-page .is-discounted,
+    .gamestore-cart-page .wc-block-components-product-price__value{
+        font-size: 34px;
+        font-weight: 700!important;
+        line-height: 140%;
+        letter-spacing: 5.1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: var(--accent-gradient);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        order:1;
+    }
+    .gamestore-cart-page .wc-block-components-product-badge{
+        border: none;
+        background-color: rgba(61, 175, 226, 0.08);
+        padding: 8px 16px;
+        border-radius: 24px;
+        min-width: 111px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .gamestore-cart-page .wc-block-formatted-money-amount,
+    .gamestore-cart-page .wc-block-components-sale-badge{
+        font-weight: 400;
+    }
+    .gamestore-cart-page .wc-block-components-quantity-selector {
+        margin-bottom: 0!important;
+        min-height: 48px!important;
+    }
+    .gamestore-cart-page .wc-block-components-quantity-selector input.wc-block-components-quantity-selector__input {
+        color: var(--text-secondary, rgba(14, 13, 15, 0.70));
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+    }
+    .gamestore-cart-page .wc-block-components-product-name {
+        color: var(--text-primary, #0E0D0F);
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        text-decoration: none;
+    }
+    .gamestore-cart-page .wc-block-components-sidebar-layout > div {
+        border-radius: 16px;
+        border: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+        background: var(--background-2, rgba(250, 250, 250, 0.02));
+        backdrop-filter: blur(4px);
+        padding: 24px;
+    }
+    .gamestore-cart-page .wc-block-cart-items thead {
+        display: none;
+    }
+
+    /* Checkout Form */
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active label {
+        display: none;
+    }
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input:-webkit-autofill,
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=email],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=number],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=password],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=tel],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=text],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input.is-active input[type=url],
+    .gamestore-cart-page .wc-block-components-text-input input:-webkit-autofill,
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=email],
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=number],
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=password],
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=tel],
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=text],
+    .gamestore-cart-page .wc-block-components-text-input.is-active input[type=url] {
+        padding: 1em 0.5em;
+        background: transparent;
+    }
+    .gamestore-cart-page .wc-blocks-components-select .wc-blocks-components-select__label {
+        display: none;
+    }
+    .gamestore-cart-page .wc-blocks-components-select .wc-blocks-components-select__container {
+        background: transparent;
+        height: 48px;
+    }
+    .gamestore-cart-page .wc-blocks-components-select .wc-blocks-components-select__select {
+        padding-top: 0;
+        border-radius: 5px;
+        border: 1px solid var(--divider-input, rgba(14, 13, 15, 0.24));
+        color: var(--text-secondary, rgba(14, 13, 15, 0.70));
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+    }
+    .gamestore-cart-page  .wc-blocks-components-select .wc-blocks-components-select__select option {
+        color: #000;
+    }
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=email],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=number],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=password],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=tel],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=text],
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input input[type=url],
+    .gamestore-cart-page .wc-block-components-text-input input[type=email],
+    .gamestore-cart-page .wc-block-components-text-input input[type=number],
+    .gamestore-cart-page .wc-block-components-text-input input[type=password],
+    .gamestore-cart-page .wc-block-components-text-input input[type=tel],
+    .gamestore-cart-page .wc-block-components-text-input input[type=text],
+    .gamestore-cart-page .wc-block-components-text-input input[type=url] {
+        border-radius: 5px;
+        border: 1px solid var(--divider-input, rgba(14, 13, 15, 0.24));
+        background: transparent;
+        color: var(--text-secondary, rgba(14, 13, 15, 0.70));
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        height: 48px;
+    }
+    .gamestore-cart-page .wc-block-components-form .wc-block-components-text-input label,
+    .gamestore-cart-page .wc-block-components-text-input label {
+        color: var(--text-secondary, rgba(14, 13, 15, 0.70));
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        top: 50%;
+    }
+}
+
