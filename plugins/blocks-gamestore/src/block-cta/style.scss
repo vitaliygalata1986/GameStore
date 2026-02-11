@@ -45,6 +45,12 @@
 
 			.cta-title {
 				margin: 0;
+				span{
+					background: var(--accent-gradient);
+					background-clip: text;
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+				}
 			}
 
 			.cta-description {

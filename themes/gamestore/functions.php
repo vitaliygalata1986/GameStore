@@ -21,7 +21,6 @@ add_action('after_setup_theme', function () {
 });
 
 
-// ... existing code ...
 function gutenberg_activate_on_products($can_edit, $post_type)
 {
     if ($post_type == 'product') {
@@ -97,7 +96,12 @@ function gamestore_gutenberg_styles()
     wp_enqueue_style('gamestore-google-font', gamestore_google_font(), [], '1.0.0');
     if (is_admin()) {
         wp_enqueue_style('gamestore-editor-style', get_template_directory_uri() . '/assets/css/editor-style.css', ['gamestore-google-font'], wp_get_theme()->get('Version'));
+        wp_enqueue_style('woo-cart', get_template_directory_uri() . '/assets/css/woo-cart.css', [], wp_get_theme()->get('Version'));
         add_editor_style('assets/css/editor-style.css');
+        add_editor_style('assets/css/woo-cart.css');
+    }
+    if(is_cart()){
+        wp_enqueue_style('woo-cart', get_template_directory_uri() . '/assets/css/woo-cart.css', [], wp_get_theme()->get('Version'));
     }
 }
 

@@ -17,6 +17,14 @@
 		},
 		"image": {
 			"type": "string"
+		},
+		"styleType": {
+			"type": "string",
+			"default": "archive"
+		},
+		"links": {
+			"type": "array",
+			"default": []
 		}
 	},
 	"textdomain": "blocks-gamestore",
