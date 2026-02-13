@@ -21,3 +21,4 @@ require_once(GAMESTORE_PLUGIN_PATH . 'inc/social-share.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/new-term-meta.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-tax.php');
 require_once(GAMESTORE_PLUGIN_PATH . 'inc/games-filter.php');
+require_once(GAMESTORE_PLUGIN_PATH . 'inc/woo-blocks-hooks.php');
