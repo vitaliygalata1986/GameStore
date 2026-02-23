@@ -16,6 +16,8 @@
  *
  */
 
+require_once('deepseek_ajax_search.php');
+
 add_action('after_setup_theme', function () {
     add_theme_support('woocommerce');
 });
@@ -33,16 +35,18 @@ add_filter('use_block_editor_for_post_type', 'gutenberg_activate_on_products', 1
 
 // Включаем поддержку REST API для таксономий товаров (категории и метки),
 // чтобы они отображались в редакторе Gutenberg
-function enable_taxonomy_rest( $args ){
+function enable_taxonomy_rest($args)
+{
     $args['show_in_rest'] = true;
     return $args;
 }
-add_filter('woocommerce_taxonomy_args_product_cat','enable_taxonomy_rest');
-add_filter('woocommerce_taxonomy_args_product_tag','enable_taxonomy_rest');
+
+add_filter('woocommerce_taxonomy_args_product_cat', 'enable_taxonomy_rest');
+add_filter('woocommerce_taxonomy_args_product_tag', 'enable_taxonomy_rest');
 
 
 // фильтр удаляет заголовок «Описание» (Description), который по умолчанию отображается внутри вкладки «Описание» на странице одного товара в WooCommerce...
-add_filter('woocommerce_product_description_heading','__return_null');
+add_filter('woocommerce_product_description_heading', '__return_null');
 
 
 function gamestore_styles()
@@ -50,7 +54,7 @@ function gamestore_styles()
     wp_enqueue_style('gamestore-general', get_template_directory_uri() . '/assets/css/gamestore.css', [], wp_get_theme()->get('Version'));
     wp_enqueue_script('gamestore-theme-related', get_template_directory_uri() . '/assets/js/gamestore.js', [], wp_get_theme()->get('Version'), true);
     wp_localize_script('gamestore-theme-related', 'gamestore_params', array(
-        'ajaxurl' => admin_url('admin-ajax.php'),
+            'ajaxurl' => admin_url('admin-ajax.php'),
     ));
 
     // wp_localize_script - позволяет динамически передавать данные внутрь JS
@@ -72,9 +76,9 @@ function gamestore_google_font()
 
     if ('off' !== _x('on', 'Google font: on or off', 'gamestore')) {
         $query_args = array(
-            'family' => urldecode($font . ':' . $font_extra),
-            'subset' => urldecode('latin,latin-ext'),
-            'display' => urldecode('swap'),
+                'family' => urldecode($font . ':' . $font_extra),
+                'subset' => urldecode('latin,latin-ext'),
+                'display' => urldecode('swap'),
         );
         $font_url = add_query_arg($query_args, '//fonts.googleapis.com/css2');
     }
@@ -97,11 +101,15 @@ function gamestore_gutenberg_styles()
     if (is_admin()) {
         wp_enqueue_style('gamestore-editor-style', get_template_directory_uri() . '/assets/css/editor-style.css', ['gamestore-google-font'], wp_get_theme()->get('Version'));
         wp_enqueue_style('woo-cart', get_template_directory_uri() . '/assets/css/woo-cart.css', [], wp_get_theme()->get('Version'));
+        wp_enqueue_style('woo-checkout', get_template_directory_uri() . '/assets/css/woo-checkout.css', [], wp_get_theme()->get('Version'));
         add_editor_style('assets/css/editor-style.css');
         add_editor_style('assets/css/woo-cart.css');
     }
-    if(is_cart()){
+    if (is_cart()) {
         wp_enqueue_style('woo-cart', get_template_directory_uri() . '/assets/css/woo-cart.css', [], wp_get_theme()->get('Version'));
+    }
+    if (is_checkout()) {
+        wp_enqueue_style('woo-checkout', get_template_directory_uri() . '/assets/css/woo-checkout.css', [], wp_get_theme()->get('Version'));
     }
 }
 
@@ -136,3 +144,44 @@ enqueue_block_assets
 
 use_block_editor_for_post_type — именно он отвечает за переключение между классическим редактором и Gutenberg для конкретных типов записей.
  * */
+
+
+/////////////  DeeepSeek Search /////////////
+
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_style(/**/
+            'deepseek',
+            get_template_directory_uri() . '/assets/css/deepseek.css',
+            [],
+            wp_get_theme()->get('Version')
+    );
+
+    wp_enqueue_script(
+            'deepseek-ajax',
+            get_template_directory_uri() . '/assets/js/deepseek-ajax.js',
+            ['jquery'],
+            wp_get_theme()->get('Version'),
+            true
+    );
+
+    wp_localize_script('deepseek-ajax', 'deepseek_ajax_params', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('deepseek_search_nonce'),
+    ]);
+});
+
+
+function deepseek_search_form_shortcode()
+{
+    ob_start();
+    ?>
+    <form id="deepseek-search-form">
+        <input type="text" id="deepseek-prompt" name="prompt" placeholder="Enter your prompt..." required>
+        <button type="submit">Search</button>
+    </form>
+    <div id="deepseek-response"></div>
+    <?php
+    return ob_get_clean();
+}
+
+add_shortcode('deepseek_search', 'deepseek_search_form_shortcode');

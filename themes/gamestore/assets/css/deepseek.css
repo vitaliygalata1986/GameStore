@@ -1,0 +1,15 @@
+#deepseek-search-form {
+    margin: 20px 0;
+}
+
+#deepseek-prompt {
+    padding: 10px;
+    width: 300px;
+}
+
+#deepseek-response {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
