@@ -16,7 +16,7 @@
  *
  */
 
-require_once('deepseek_ajax_search.php');
+// require_once('deepseek_ajax_search.php');
 
 add_action('after_setup_theme', function () {
     add_theme_support('woocommerce');
@@ -147,9 +147,9 @@ use_block_editor_for_post_type — именно он отвечает за пе�
 
 
 /////////////  DeeepSeek Search /////////////
-
+/*
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style(/**/
+    wp_enqueue_style(
             'deepseek',
             get_template_directory_uri() . '/assets/css/deepseek.css',
             [],
@@ -169,7 +169,7 @@ add_action('wp_enqueue_scripts', function () {
             'nonce' => wp_create_nonce('deepseek_search_nonce'),
     ]);
 });
-
+*/
 
 function deepseek_search_form_shortcode()
 {
@@ -184,4 +184,4 @@ function deepseek_search_form_shortcode()
     return ob_get_clean();
 }
 
-add_shortcode('deepseek_search', 'deepseek_search_form_shortcode');
+// add_shortcode('deepseek_search', 'deepseek_search_form_shortcode');
