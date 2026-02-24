@@ -46,10 +46,8 @@ services:
       # Ты меняешь файл на хосте: /var/www/gutenberg.loc/themes/mytheme/style.css и внутри контейнера он сразу доступен: /var/www/html/wp-content/themes/mytheme/style.css изменения мгновенно видны в WordPress.
       - ./themes/:/var/www/html/wp-content/themes/
       # То же самое с плагинами:
-      - ./plugins/blocks-gamestore/:/var/www/html/wp-content/plugins/blocks-gamestore/
-      - ./plugins/core-gamestore/:/var/www/html/wp-content/plugins/core-gamestore/
       - ./mu-plugins/:/var/www/html/wp-content/mu-plugins/
-      - ./plugins/deepseek-search-integration/:/var/www/html/wp-content/plugins/deepseek-search-integration/
+      - ./plugins/:/var/www/html/wp-content/plugins/
       # Это настройка PHP.
       - ./.srv/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     # phpmyadmin - image - phpmyadmin сервис Это контейнер phpMyAdmin.
