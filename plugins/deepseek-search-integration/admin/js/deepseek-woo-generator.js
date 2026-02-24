@@ -1,7 +1,7 @@
 jQuery(function($){
     $(document).on('click', '#deepseek-generate-btn', function(){
         const btn = $(this);
-        const productId = btn.data('product-id');
+        const product_id = btn.data('product-id');
         const nonce = btn.data('nonce');
         const extra = $('#deepseek_extra').val();
 
