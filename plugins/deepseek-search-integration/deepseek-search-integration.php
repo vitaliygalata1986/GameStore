@@ -12,18 +12,16 @@ Domain Path: /languages
 
 use Vitos\DeepSeek\Includes\DeepSeek_Search_Integration;
 use Vitos\DeepSeek\Admin\DeepSeek_Admin;
+// use Vitos\DeepSeek\Admin\DeepSeek_Woo_Bulk;
+use Vitos\DeepSeek\Admin\DeepSeek_Woo_Bulk_Generator;
 use Vitos\DeepSeek\Admin\DeepSeek_Woo_Generator;
 
 defined('ABSPATH') or die;
-
 define('DEEPSEEK_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DEEPSEEK_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DEEPSEEK_PLUGIN_NAME', dirname(plugin_basename(__FILE__)));
 
-require_once DEEPSEEK_PLUGIN_DIR . 'admin/class-deepseek-admin.php';
-require_once DEEPSEEK_PLUGIN_DIR . 'admin/class-deepseek-woo-generator.php';
-require_once DEEPSEEK_PLUGIN_DIR . 'includes/class-deepseek-search-integration.php';
-
+require_once DEEPSEEK_PLUGIN_DIR . 'includes/autoload.php';
 
 function run_deepseek_search_integrations()
 {
@@ -32,8 +30,10 @@ function run_deepseek_search_integrations()
     if (is_admin()) {
         new DeepSeek_Admin();
         new DeepSeek_Woo_Generator();
+        // new DeepSeek_Woo_Bulk();
+        new DeepSeek_Woo_Bulk_Generator();
     }
 }
 
-run_deepseek_search_integrations();
+add_action('plugins_loaded', 'run_deepseek_search_integrations');
 

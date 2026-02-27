@@ -1,11 +1,9 @@
 <?php
-
 namespace Vitos\DeepSeek\Includes;
-
-use Vitos\DeepSeek\Admin\DeepSeek_Admin;
 
 defined('ABSPATH') || exit;
 
+use Vitos\DeepSeek\Admin\DeepSeek_Admin;
 class DeepSeek_Search_Integration
 {
     const NONCE_ACTION = 'deepseek_search_nonce';
