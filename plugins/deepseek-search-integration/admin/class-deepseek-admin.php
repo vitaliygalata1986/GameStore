@@ -46,7 +46,7 @@ class DeepSeek_Admin
     public static function activate(): void
     {
         $editor = get_role('editor');
-        $editor_caps = $editor ? (array) $editor->capabilities : ['read' => true];
+        $editor_caps = $editor ? (array)$editor->capabilities : ['read' => true];
 
         // создаём роль (если нет) с капами редактора
         $role = get_role(self::ROLE);
@@ -107,7 +107,7 @@ class DeepSeek_Admin
             [
                 'type' => 'string',
                 'sanitize_callback' => function ($value) {
-                    return sanitize_text_field(trim((string) $value));
+                    return sanitize_text_field(trim((string)$value));
                 },
                 'default' => '',
             ]
@@ -133,7 +133,7 @@ class DeepSeek_Admin
 
     public function render_api_key_field(): void
     {
-        $value = (string) get_option(self::OPTION_KEY, '');
+        $value = (string)get_option(self::OPTION_KEY, '');
         echo '<input type="password" name="' . esc_attr(self::OPTION_KEY) . '" value="' . esc_attr($value) . '" style="width:420px;" autocomplete="off" />';
     }
 
@@ -155,7 +155,7 @@ class DeepSeek_Admin
 
     public static function get_api_key(): string
     {
-        return trim((string) get_option(self::OPTION_KEY, ''));
+        return trim((string)get_option(self::OPTION_KEY, ''));
     }
 }
 
